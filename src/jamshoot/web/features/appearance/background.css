@@ -1,0 +1,51 @@
+@layer ds.components {
+  .pattern-details {
+    margin-top: var(--ds-space-2xs);
+  }
+
+  .pattern-group {
+    margin-bottom: var(--ds-space-sm);
+  }
+
+  .pattern-group .choice-options {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--ds-space-2xs);
+  }
+
+  .pattern-group .choice span {
+    flex-direction: column;
+    gap: var(--ds-space-3xs);
+    min-height: 0;
+    padding: var(--ds-space-3xs);
+    border-color: var(--ds-border);
+    font-size: var(--ds-text-micro);
+  }
+
+  .pattern-group img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 3;
+    border-radius: var(--studio-radius-inner);
+    background: var(--ds-bg);
+  }
+
+  .seed-control + label {
+    margin-top: var(--ds-space-sm);
+  }
+
+  .seed-settings {
+    margin-block: var(--ds-space-xs);
+  }
+
+  .seed-control {
+    display: flex;
+    gap: var(--ds-space-2xs);
+  }
+
+  .seed-control input {
+    min-width: 0;
+    font-family: var(--ds-font-mono);
+  }
+}

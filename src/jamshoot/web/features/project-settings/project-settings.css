@@ -1,0 +1,173 @@
+/* Project settings: full screen on phones, a centered sheet from 52rem. Its height does not
+   follow the open tab, and the footer stays at the bottom of a short one. */
+@layer studio {
+  #project-json {
+    margin: var(--ds-space-xs) 0;
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+  }
+
+  .project-dialog {
+    width: 100%;
+    max-width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .project-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dialog-top,
+  .project-dialog .dialog-footer {
+    position: sticky;
+    z-index: var(--ds-layer-chrome);
+    background: var(--ds-surface-raised);
+  }
+
+  .dialog-top {
+    top: 0;
+    border-bottom: var(--studio-rule);
+  }
+
+  .project-dialog .dialog-footer {
+    bottom: 0;
+    margin-top: auto;
+  }
+
+  .dialog-tabs {
+    display: flex;
+    gap: var(--ds-space-3xs);
+    padding: 0 var(--ds-space-xs) var(--ds-space-2xs);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .dialog-tab {
+    flex: none;
+    padding: var(--ds-space-3xs) var(--ds-space-xs);
+    border: 0;
+    border-radius: var(--ds-radius-pill);
+    background: none;
+    color: var(--ds-text-muted);
+    font: inherit;
+    font-weight: var(--ds-weight-medium);
+    cursor: pointer;
+  }
+
+  .dialog-tab:hover {
+    background: var(--studio-hover);
+    color: var(--ds-text);
+  }
+
+  .dialog-tab[aria-selected="true"] {
+    background: var(--studio-selected);
+    color: var(--ds-text);
+  }
+
+  .project-dialog .pattern-group .choice-options {
+    grid-template-columns: repeat(auto-fill, minmax(var(--ds-space-5xl), 1fr));
+  }
+
+  .project-list-heading {
+    margin-top: var(--ds-space-md);
+  }
+
+  .project-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block: var(--studio-rule);
+  }
+
+  .project-list-row {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    padding-block: var(--ds-space-2xs);
+  }
+
+  .project-list-row + .project-list-row {
+    border-top: var(--studio-rule);
+  }
+
+  .project-list-name {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-weight: var(--ds-weight-medium);
+  }
+
+  .project-list-name .detail {
+    display: block;
+    color: var(--ds-text-muted);
+    font-weight: var(--ds-weight-regular);
+  }
+
+  .project-inline-editor {
+    width: 100%;
+    padding-block: var(--ds-space-xs);
+  }
+
+  .project-list-actions,
+  .project-list-notice {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--ds-space-2xs);
+  }
+
+  .project-list-notice {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-small);
+    margin-top: var(--ds-space-2xs);
+  }
+
+  .project-inline-editor .project-list-actions {
+    margin-top: var(--ds-space-sm);
+  }
+
+  .project-field-error {
+    color: var(--studio-danger);
+    font-size: var(--ds-text-small);
+    margin-block: var(--ds-space-2xs);
+  }
+
+  .project-field-error:empty {
+    display: none;
+  }
+
+  .project-inline-editor input[aria-invalid="true"] {
+    border-color: var(--studio-danger);
+  }
+
+  @media (min-width: 52rem) {
+    .project-dialog {
+      width: min(var(--ds-content-narrow), calc(100% - 2 * var(--ds-space-sm)));
+      height: calc(100dvh - 2 * var(--ds-space-sm));
+      max-height: calc(100dvh - 2 * var(--ds-space-sm));
+      margin: auto;
+      border: var(--studio-rule);
+      border-radius: var(--ds-radius-lg);
+    }
+
+    .project-dialog .inspector-section {
+      padding: var(--ds-space-md) var(--ds-space-lg);
+    }
+
+    .project-dialog .dialog-heading,
+    .project-dialog .dialog-footer {
+      padding-inline: var(--ds-space-lg) var(--ds-space-sm);
+    }
+
+    .dialog-tabs {
+      padding-inline: var(--ds-space-md);
+    }
+  }
+}

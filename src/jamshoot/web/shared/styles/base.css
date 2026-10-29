@@ -1,0 +1,119 @@
+/* Element defaults, base atoms and the states that outrank every component. */
+@layer ds.reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  fieldset {
+    margin: 0;
+  }
+
+  fieldset {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  button,
+  .btn,
+  .upload-box,
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer ds.base {
+  body {
+    background: var(--ds-surface);
+    color: var(--ds-text);
+    font-family: var(--ds-font-sans);
+    font-size: var(--ds-text-caption);
+    line-height: var(--ds-leading-body);
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-semibold);
+    line-height: var(--ds-leading-snug);
+  }
+
+  code {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+    overflow-wrap: anywhere;
+  }
+
+  :focus-visible {
+    outline: var(--studio-focus);
+    outline-offset: var(--ds-focus-offset);
+  }
+
+  ::selection {
+    background: var(--ds-accent);
+    color: var(--ds-on-accent);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: var(--ds-hairline);
+    height: var(--ds-hairline);
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: var(--ds-space-2xs);
+    left: var(--ds-space-2xs);
+    z-index: var(--ds-layer-top);
+    padding: var(--ds-space-2xs) var(--ds-space-sm);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-accent);
+    color: var(--ds-on-accent);
+    text-decoration: none;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+}
+
+/*
+ * States that outrank every component and page rule. As the last layer, their normal
+ * declarations win over all earlier layers, so none of them needs `!important`.
+ */
+@layer state {
+  [hidden] {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0s;
+      animation-duration: 0s;
+    }
+  }
+}

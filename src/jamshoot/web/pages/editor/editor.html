@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="jamshoot-token" content="__SESSION_TOKEN__">
+  <meta name="jamshoot-api" content="__API_BASE__">
+  <title>JamShoot Studio</title>
+  <link rel="icon" href="../../assets/jamshoot-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../shared/styles/tokens.css">
+  <link rel="stylesheet" href="../../shared/styles/theme.css">
+  <link rel="stylesheet" href="../../shared/styles/base.css">
+  <link rel="stylesheet" href="../../shared/ui/button/button.css">
+  <link rel="stylesheet" href="../../shared/ui/field/field.css">
+  <link rel="stylesheet" href="../../shared/ui/badge/badge.css">
+  <link rel="stylesheet" href="../../shared/ui/range-control/range-control.css">
+  <link rel="stylesheet" href="../../shared/ui/file-upload/file-upload.css">
+  <link rel="stylesheet" href="../../shared/ui/section/section.css">
+  <link rel="stylesheet" href="../../shared/ui/disclosure/disclosure.css">
+  <link rel="stylesheet" href="../../shared/ui/select/select.css">
+  <link rel="stylesheet" href="../../shared/ui/choice-group/choice-group.css">
+  <link rel="stylesheet" href="../../features/appearance/background.css">
+  <link rel="stylesheet" href="../../features/appearance/typography.css">
+  <link rel="stylesheet" href="../../features/appearance/inspector.css">
+  <link rel="stylesheet" href="../../features/appearance/layouts.css">
+  <link rel="stylesheet" href="../../features/slides/slides.css">
+  <link rel="stylesheet" href="../../features/project-settings/platforms.css">
+  <link rel="stylesheet" href="../../shared/ui/topbar/topbar.css">
+  <link rel="stylesheet" href="../../shared/ui/dialogs/dialogs.css">
+  <link rel="stylesheet" href="../../shared/ui/color-picker/color-picker.css">
+  <link rel="stylesheet" href="../../features/appearance/palettes.css">
+  <link rel="stylesheet" href="../../shared/ui/icon/icon.css">
+  <link rel="stylesheet" href="./editor.css">
+  <link rel="stylesheet" href="../../features/preview/preview.css">
+  <link rel="stylesheet" href="../../features/project-settings/project-settings.css">
+  <script src="./editor.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to canvas</a>
+  <header id="topbar" class="topbar">
+    <div class="brand"><img class="brand-logo" src="../../assets/jamshoot-logo.svg" alt="" width="32" height="32"><span class="brand-name"><strong>JamShoot</strong><span class="brand-sub">Studio</span></span></div>
+    <a id="back-to-projects" class="btn btn-quiet back-link" href="/" aria-label="Projects" title="All projects"><span class="icon icon-back" aria-hidden="true"></span><span class="back-label">Projects</span></a>
+    <h1 id="project-name">Opening project…</h1>
+    <div class="actions">
+      <span id="saved-state" class="save-state" role="status">Loading…</span>
+      <button id="reload" class="btn btn-quiet btn-icon" aria-label="Reload from disk" title="Reload from disk"><span class="icon icon-refresh" aria-hidden="true"></span></button>
+      <button id="open-project" class="btn" aria-label="Project" title="Project settings" aria-haspopup="dialog" aria-controls="project-settings" disabled><span class="icon icon-settings" aria-hidden="true"></span><span class="btn-label">Project</span></button>
+      <button id="save" class="btn" aria-label="Save" title="Save (⌘S)"><span class="icon icon-save" aria-hidden="true"></span><span class="btn-label">Save</span></button>
+      <button id="export" class="btn btn-primary" aria-label="Export PNGs" title="Export every PNG"><span class="icon icon-download" aria-hidden="true"></span><span class="btn-label">Export PNGs</span></button>
+    </div>
+  </header>
+  <main id="editor" class="editor">
+    <aside id="slides-panel" class="panel slides-panel" aria-labelledby="slides-heading">
+      <div class="panel-heading"><h2 id="slides-heading">Slides <span id="slide-count" class="badge">0</span></h2><button data-close-panel class="btn btn-quiet btn-icon" aria-label="Hide slides panel" title="Hide slides panel"><span class="icon icon-close" aria-hidden="true"></span></button></div>
+      <fieldset id="slide-controls" class="slide-controls"><legend class="sr-only">Slide navigation</legend>
+        <ol id="slides" class="slides" aria-label="Slides"></ol>
+        <div class="slide-footer">
+          <button id="add-slide" class="btn add-slide"><span class="icon icon-add" aria-hidden="true"></span>Add slide</button>
+          <div class="slide-actions" role="group" aria-label="Selected slide">
+            <button id="duplicate-slide" class="btn btn-quiet btn-icon" aria-label="Duplicate slide" title="Duplicate slide"><span class="icon icon-copy" aria-hidden="true"></span></button>
+            <button id="move-up" class="btn btn-quiet btn-icon" aria-label="Move slide up" title="Move slide up"><span class="icon icon-arrow-up" aria-hidden="true"></span></button>
+            <button id="move-down" class="btn btn-quiet btn-icon" aria-label="Move slide down" title="Move slide down"><span class="icon icon-arrow-down" aria-hidden="true"></span></button>
+            <button id="remove-slide" class="btn btn-danger btn-icon" aria-label="Delete slide" title="Delete slide"><span class="icon icon-trash" aria-hidden="true"></span></button>
+          </div>
+        </div>
+      </fieldset>
+    </aside>
+
+    <section id="workspace" class="workspace" aria-label="Rendered screenshot preview" tabindex="-1">
+      <div class="canvas-toolbar">
+        <button id="toggle-slides-panel" class="btn btn-quiet panel-toggle" aria-label="Slides" aria-controls="slides-panel" aria-expanded="true"><span class="icon icon-albums" aria-hidden="true"></span><span class="btn-label">Slides</span></button>
+        <div class="history-actions" role="group" aria-label="Edit history"><button id="undo" class="btn btn-quiet btn-icon" aria-label="Undo" disabled><span class="icon icon-undo" aria-hidden="true"></span></button><button id="redo" class="btn btn-quiet btn-icon" aria-label="Redo" disabled><span class="icon icon-redo" aria-hidden="true"></span></button></div>
+        <div class="context-fields"><div class="compact-field"><label for="locale">Language</label><select id="locale"></select></div><div class="compact-field"><label for="variant">Variant</label><select id="variant"></select></div><div class="compact-field output-context"><label for="target">Size</label><select id="target"></select></div></div>
+        <button id="toggle-inspector-panel" class="btn btn-quiet panel-toggle" aria-label="Settings" aria-controls="inspector-panel" aria-expanded="true"><span class="icon icon-options" aria-hidden="true"></span><span class="btn-label">Settings</span></button>
+      </div>
+      <div class="canvas-heading"><span id="preview-title">Preview</span><span id="dimensions" class="badge">—</span></div>
+      <p id="canvas-error" class="inspector-error" role="alert" hidden></p><button id="retry-project" class="btn" hidden>Try opening project again</button>
+      <div id="missing-screenshot" class="canvas-notice" role="status" hidden><span class="icon icon-image" aria-hidden="true"></span><p id="missing-screenshot-text"></p><button id="upload-missing" class="btn btn-sm btn-primary" type="button"><span class="icon icon-cloud-upload" aria-hidden="true"></span>Upload screenshot</button></div>
+      <div class="canvas-viewport"><p id="preview-updating" class="canvas-notice preview-updating" role="status" hidden>Updating preview… Showing previous version.</p><div class="artboard"><img id="preview" alt="Rendered App Store screenshot" hidden><div id="empty-preview" class="empty-preview"><span class="icon icon-image" aria-hidden="true"></span><p>Opening your project and preparing a preview…</p></div><div class="preview-failure"><p id="preview-error" class="preview-error" role="alert" hidden></p><button id="retry-preview" class="btn" hidden>Try preview again</button></div></div></div>
+      <div class="canvas-bottom"><span id="file-count">— PNG files</span><span id="status" class="status" role="status" aria-live="polite">Opening your project…</span></div>
+    </section>
+
+    <aside id="inspector-panel" class="panel inspector-panel" aria-labelledby="inspector-heading">
+      <div class="panel-heading"><div><h2 id="inspector-heading">Slide settings</h2><p class="panel-subtitle">Editing <strong id="active-slide"></strong></p></div><button data-close-panel class="btn btn-quiet btn-icon" aria-label="Hide settings panel" title="Hide settings panel"><span class="icon icon-close" aria-hidden="true"></span></button></div>
+      <fieldset id="controls"><legend class="sr-only">Screenshot settings</legend>
+        <section class="inspector-section"><label for="slide-name">Slide name</label><input id="slide-name" maxlength="200" placeholder="Name this slide" autocomplete="off"><p class="hint">Shown in the slide list. Shared across languages.</p></section>
+        <section class="inspector-section"><h3>Text <span id="text-locale" class="badge"></span></h3>
+          <label for="feature-label">Eyebrow <span>optional</span></label><input id="feature-label" maxlength="200" placeholder="INTRODUCING YOUR APP" autocomplete="off">
+          <label for="headline">Headline</label><textarea id="headline" rows="2" maxlength="2000" aria-describedby="headline-error"></textarea><p id="headline-error" class="form-error" role="alert" hidden>Enter a headline. Your other edits are kept.</p>
+          <label for="subtitle">Supporting text <span>optional</span></label><textarea id="subtitle" rows="3" maxlength="2000" placeholder="What makes your app useful?"></textarea>
+          <fieldset id="labelStyle" class="choice-group segmented"><legend>Feature label</legend></fieldset><details class="pattern-details typography-details"><summary>Typography on this slide <span id="typography-count" class="badge" hidden></span></summary><p class="hint">Overrides Project → Typography for this slide in every language.</p><fieldset id="typography" class="typography-controls"><legend class="sr-only">Slide typography</legend><fieldset id="type-field" class="choice-group segmented"><legend class="sr-only">Text field</legend></fieldset><label for="type-font">Font</label><select id="type-font"></select><fieldset id="type-case" class="choice-group segmented"><legend>Case</legend></fieldset><fieldset id="type-units" class="choice-group segmented unit-switch"><legend>Show values in</legend></fieldset><div id="type-ranges"></div><button id="reset-typography" class="btn btn-quiet btn-sm"><span class="icon icon-refresh" aria-hidden="true"></span>Reset</button></fieldset></details>
+        </section>
+        <section class="inspector-section"><h3>Screenshot <span id="asset-platform" class="badge"></span></h3><label for="existing-asset">Project image</label><select id="existing-asset" data-placeholder="Choose a project image…"><option value="">Choose a project image…</option></select><input id="upload" class="sr-only" type="file" accept="image/png,image/jpeg,image/webp"><label class="upload-box" for="upload"><span class="icon icon-cloud-upload" aria-hidden="true"></span><span>Upload screenshot<small class="detail">PNG, JPEG, WebP · 16 MiB max</small></span></label><p id="asset-name" class="hint"></p></section>
+        <section class="inspector-section"><div class="section-heading"><h3>Appearance</h3><button id="reset-style" class="btn btn-quiet btn-sm" title="Remove this slide's layout, color and pattern overrides"><span class="icon icon-refresh" aria-hidden="true"></span>Reset slide</button></div>
+          <p id="style-scope" class="hint"></p></section>
+        <section class="inspector-section"><h3>Layout</h3>
+          <fieldset id="layout" class="choice-group layout-group"><legend class="sr-only">Layout</legend></fieldset>
+          <div id="device-settings" class="device-settings"><fieldset id="deviceFrame" class="choice-group segmented"><legend>Device frame</legend></fieldset><fieldset id="screenshotFit" class="choice-group segmented"><legend>Screen</legend></fieldset><p class="hint">Match keeps the whole screenshot and shapes the screen to it. Crop fills the device's native display.</p></div>
+          <div class="layout-spacing"><label for="layout-template">Spacing</label><select id="layout-template"></select><p id="layout-template-status" class="hint"></p>
+          <details class="pattern-details"><summary>Adjust spacing</summary><p class="hint">% values fit every size: spacing follows the screenshot height, widths its width. Pixels show the previewed size.</p><fieldset id="units" class="choice-group segmented unit-switch"><legend>Show values in</legend></fieldset><fieldset id="layout-settings"><legend class="sr-only">Slide spacing</legend></fieldset><button id="reset-layout-settings" class="btn btn-quiet btn-sm">Reset to defaults</button></details>
+          <button id="save-layout-template" class="btn btn-sm save-palette"><span class="icon icon-add" aria-hidden="true"></span>Save as template</button></div>
+        </section>
+        <section id="saved-styles" class="inspector-section"><h3>Colors</h3>
+          <label for="palette">Palette</label><select id="palette"></select>
+          <div id="palette-changes" class="palette-changes"><p id="palette-status" class="hint" role="status"></p><div class="button-row"><button id="update-palette" class="btn btn-sm btn-primary" hidden><span class="icon icon-save" aria-hidden="true"></span>Update palette</button><button id="save-palette" class="btn btn-sm"><span class="icon icon-add" aria-hidden="true"></span>Save as palette</button><button id="reset-colors" class="btn btn-quiet btn-sm" title="Remove changes made on this slide"><span class="icon icon-refresh" aria-hidden="true"></span>Reset</button><button id="edit-palette" class="btn btn-quiet btn-sm" title="Edit this palette in Project → Colors"><span class="icon icon-edit" aria-hidden="true"></span>Edit palette</button></div></div>
+          <details id="customize-colors" class="pattern-details customize-colors"><summary>Customize on this slide <span class="badge" hidden></span></summary><p class="hint">Changes apply to this slide only. Update the palette to share them.</p>
+            <fieldset id="colors" class="color-list"><legend class="sr-only">Slide colors</legend></fieldset></details>
+        </section>
+        <section class="inspector-section"><div class="section-heading"><h3>Background pattern</h3><span id="pattern-value" class="badge"></span></div>
+          <fieldset id="pattern" class="choice-group pattern-group"><legend class="sr-only">Pattern</legend></fieldset>
+          <details class="pattern-details"><summary>Pattern adjustments</summary><p id="pattern-settings-empty" class="hint">Choose a pattern to adjust density, opacity, scale and rotation.</p><fieldset id="pattern-settings"><legend class="sr-only">Slide pattern adjustments</legend></fieldset><div id="seed-settings" class="seed-settings"><label for="seed">Arrangement seed</label><div class="seed-control"><input id="seed" maxlength="2000" autocomplete="off"><button id="random-seed" class="btn btn-icon" aria-label="New pattern seed" title="New pattern seed"><span class="icon icon-refresh" aria-hidden="true"></span></button></div><p class="hint">Same seed, same arrangement.</p></div><button id="reset-pattern-settings" class="btn btn-quiet btn-sm">Reset to defaults</button></details>
+        </section>
+      </fieldset>
+    </aside>
+  </main>
+  <dialog id="project-settings" class="dialog project-dialog" aria-labelledby="project-heading" aria-describedby="project-scope">
+    <div class="dialog-top">
+      <div class="dialog-heading"><div><h2 id="project-heading">Project settings</h2><p id="project-scope" class="hint">Shared by every slide. Slides can override layout, typography, colors and pattern.</p></div><button id="close-project" class="btn btn-quiet btn-icon" aria-label="Close project settings" title="Close" autofocus><span class="icon icon-close" aria-hidden="true"></span></button></div>
+      <div id="project-tabs" class="dialog-tabs" role="tablist" aria-label="Project sections"><button id="tab-general" class="dialog-tab" type="button" role="tab" aria-controls="project-general">General</button><button id="tab-layout" class="dialog-tab" type="button" role="tab" aria-controls="project-layout">Layout</button><button id="tab-typography" class="dialog-tab" type="button" role="tab" aria-controls="project-typography">Typography</button><button id="tab-colors" class="dialog-tab" type="button" role="tab" aria-controls="color-style-manager">Colors</button><button id="tab-pattern" class="dialog-tab" type="button" role="tab" aria-controls="project-pattern">Pattern</button><button id="tab-advanced" class="dialog-tab" type="button" role="tab" aria-controls="project-advanced">Advanced</button></div>
+    </div>
+    <p id="project-error" class="inspector-error" role="alert" hidden></p>
+    <fieldset id="project-controls"><legend class="sr-only">Global project settings</legend>
+      <section id="project-general" class="inspector-section" role="tabpanel" aria-labelledby="tab-general"><label for="project-title">Project name</label><input id="project-title" maxlength="2000" autocomplete="off">
+        <div class="section-heading project-list-heading"><h3>Languages <span id="locale-count" class="badge"></span></h3><button id="new-locale" class="btn btn-quiet btn-sm" type="button" aria-expanded="false" aria-controls="locale-editor"><span class="icon icon-add" aria-hidden="true"></span>Add language</button></div>
+        <ul id="project-locales" class="project-list" aria-label="Project languages"></ul><div id="locale-editor" hidden></div><div id="locale-notice" class="project-list-notice" role="status" hidden></div>
+        <div class="section-heading project-list-heading"><h3>Variants <span id="variant-count" class="badge"></span></h3><button id="new-variant" class="btn btn-quiet btn-sm" type="button" aria-expanded="false" aria-controls="variant-editor"><span class="icon icon-add" aria-hidden="true"></span>Add variant</button></div>
+        <ul id="project-variants" class="project-list" aria-label="Project variants"></ul><div id="variant-editor" hidden></div><div id="variant-notice" class="project-list-notice" role="status" hidden></div>
+        <div class="section-heading subsection-heading"><h3>Platforms and sizes</h3><select id="add-platform" data-menu data-placeholder="Add platform"></select></div><p class="hint section-hint">A new platform starts with the size App Store Connect requires. Each size is exported for every slide.</p><div id="target-options" class="target-options"></div><div id="custom-size-editor" hidden></div><input id="bulk-upload" class="sr-only" type="file" multiple accept="image/png,image/jpeg,image/webp" tabindex="-1" aria-hidden="true"><p class="hint">Required display groups follow the catalog reviewed on 2026-10-15.</p>
+        <h3 class="subsection-heading">Export destination</h3><code id="output-path"></code><p class="hint">Exports every slide, language, size and variant. Each export uses a new numbered directory.</p></section>
+      <section id="project-layout" class="inspector-section" role="tabpanel" aria-labelledby="tab-layout"><h3>Default layout</h3>
+        <fieldset id="default-layout" class="choice-group layout-group"><legend class="sr-only">Default layout</legend></fieldset>
+        <div id="default-device-settings" class="device-settings"><fieldset id="default-deviceFrame" class="choice-group segmented"><legend>Device frame</legend></fieldset><fieldset id="default-screenshotFit" class="choice-group segmented"><legend>Screen</legend></fieldset></div>
+        <div class="layout-spacing palette-default"><label for="default-layout-template">Default spacing</label><select id="default-layout-template"></select><p id="default-layout-template-status" class="hint"></p>
+        <details class="pattern-details"><summary>Adjust spacing</summary><p class="hint">% values fit every size: spacing follows the screenshot height, widths its width. Pixels show the previewed size.</p><fieldset id="default-units" class="choice-group segmented unit-switch"><legend>Show values in</legend></fieldset><fieldset id="default-layout-settings"><legend class="sr-only">Default spacing</legend></fieldset><button id="default-reset-layout-settings" class="btn btn-quiet btn-sm">Use template values</button></details>
+        <button id="default-save-layout-template" class="btn btn-sm"><span class="icon icon-add" aria-hidden="true"></span>Save as template</button></div>
+        <div class="section-heading palettes-heading"><h4>Layout templates <span id="layout-template-count" class="badge">0</span></h4><button id="new-layout-template" class="btn btn-sm"><span class="icon icon-add" aria-hidden="true"></span>New template</button></div>
+        <p class="hint section-hint">Spacing shared by slides that choose them. Editing a template updates those slides; deleting one keeps their current values.</p>
+        <ul id="layout-template-list" class="palette-list" aria-label="Layout templates"></ul>
+      </section>
+      <section id="project-typography" class="inspector-section" role="tabpanel" aria-labelledby="tab-typography"><h3>Text styles</h3><p class="hint section-hint">Every slide uses these; a slide can override them under Text. Size is % of the screenshot height, or pixels of the previewed size; line height and letter spacing are % of the font size.</p>
+        <fieldset id="default-labelStyle" class="choice-group segmented"><legend>Feature label</legend></fieldset><fieldset id="default-typography" class="typography-controls"><legend class="sr-only">Default typography</legend><fieldset id="default-type-field" class="choice-group segmented"><legend class="sr-only">Text field</legend></fieldset><label for="default-type-font">Font</label><select id="default-type-font"></select><fieldset id="default-type-case" class="choice-group segmented"><legend>Case</legend></fieldset><fieldset id="default-type-units" class="choice-group segmented unit-switch"><legend>Show values in</legend></fieldset><div id="default-type-ranges"></div><button id="default-reset-typography" class="btn btn-quiet btn-sm"><span class="icon icon-refresh" aria-hidden="true"></span>Reset</button></fieldset>
+        <h3 class="subsection-heading">Project fonts <span id="font-count" class="badge">0</span></h3><p class="hint section-hint">Uploaded fonts are stored in the project's assets/fonts folder and travel with it. Installed fonts are listed under Font too, but render only on computers that have them.</p>
+        <ul id="project-fonts" class="project-list" aria-label="Project fonts"></ul><input id="font-upload" class="sr-only" type="file" accept=".ttf,.otf,.ttc"><label class="upload-box" for="font-upload"><span class="icon icon-cloud-upload" aria-hidden="true"></span><span>Upload font<small class="detail">TTF, OTF, TTC · 16 MiB max</small></span></label>
+      </section>
+      <section id="color-style-manager" class="inspector-section" role="tabpanel" aria-labelledby="tab-colors">
+        <div class="section-heading palettes-heading"><h3>Palettes <span id="palette-count" class="badge">0</span></h3><button id="new-palette" class="btn btn-sm"><span class="icon icon-add" aria-hidden="true"></span>New palette</button></div>
+        <p class="hint section-hint">A palette is a look: background fill and gradient, pattern and text colors. Edit it once and every slide and size that uses it follows.</p>
+        <fieldset id="palette-list" class="palette-picker"><legend class="sr-only">Choose a palette to edit</legend></fieldset>
+        <div id="palette-editor" class="palette-editor">
+          <div class="palette-editor-head">
+            <div id="palette-preview" class="palette-preview" aria-hidden="true"><i></i><strong>Headline</strong><span>Supporting text</span></div>
+            <div class="palette-editor-meta">
+              <label for="palette-name">Name</label><input id="palette-name" maxlength="200" autocomplete="off">
+              <p id="palette-usage" class="hint"></p>
+              <div class="button-row"><button id="palette-customize" class="btn btn-sm btn-primary"><span class="icon icon-edit" aria-hidden="true"></span>Customize</button><button id="palette-apply" class="btn btn-sm">Use on current slide</button><button id="palette-make-default" class="btn btn-sm">Use as project default</button><button id="palette-duplicate" class="btn btn-quiet btn-sm"><span class="icon icon-copy" aria-hidden="true"></span>Duplicate</button><button id="palette-delete" class="btn btn-quiet btn-sm"><span class="icon icon-trash" aria-hidden="true"></span>Delete</button></div>
+            </div>
+          </div>
+          <fieldset id="palette-fields" class="color-list"><legend class="sr-only">Palette colors and gradient</legend></fieldset>
+        </div>
+        <div id="default-saved-styles" class="project-default-colors">
+          <h3>Project default</h3>
+          <div id="default-palette-changes" class="palette-changes"><p id="default-palette-status" class="hint" role="status"></p><div class="button-row"><button id="default-update-palette" class="btn btn-sm btn-primary" hidden><span class="icon icon-save" aria-hidden="true"></span>Update palette</button><button id="default-save-palette" class="btn btn-sm"><span class="icon icon-add" aria-hidden="true"></span>Save as palette</button><button id="default-reset-colors" class="btn btn-quiet btn-sm"><span class="icon icon-refresh" aria-hidden="true"></span>Reset</button><button id="default-edit-palette" class="btn btn-quiet btn-sm"><span class="icon icon-edit" aria-hidden="true"></span>Edit palette</button></div></div>
+          <details id="default-customize-colors" class="pattern-details customize-colors"><summary>Customize the project default <span class="badge" hidden></span></summary><p class="hint">Changes apply to slides that follow the project. Update the palette to share them.</p>
+            <fieldset id="default-colors" class="color-list"><legend class="sr-only">Default colors</legend></fieldset></details>
+        </div>
+      </section>
+      <section id="project-pattern" class="inspector-section" role="tabpanel" aria-labelledby="tab-pattern"><div class="section-heading"><h3>Default background pattern</h3><span id="default-pattern-value" class="badge"></span></div>
+        <fieldset id="default-pattern" class="choice-group pattern-group"><legend class="sr-only">Default pattern</legend></fieldset>
+        <details class="pattern-details" open><summary>Pattern adjustments</summary><p id="default-pattern-settings-empty" class="hint">Choose a pattern above to adjust density, opacity, scale and rotation.</p><fieldset id="default-pattern-settings"><legend class="sr-only">Default pattern adjustments</legend></fieldset><div id="default-seed-settings" class="seed-settings"><label for="default-seed">Arrangement seed</label><div class="seed-control"><input id="default-seed" maxlength="2000" autocomplete="off"><button id="default-random-seed" class="btn btn-icon" aria-label="New default pattern seed" title="New default pattern seed"><span class="icon icon-refresh" aria-hidden="true"></span></button></div><p class="hint">Same seed, same arrangement.</p></div><button id="default-reset-pattern-settings" class="btn btn-quiet btn-sm">Use built-in adjustments</button></details>
+      </section>
+      <section id="project-advanced" class="inspector-section" role="tabpanel" aria-labelledby="tab-advanced"><label for="project-json">Project JSON</label><p class="hint">Languages, variants and the full project. Apply updates the draft; Save writes to disk.</p><textarea id="project-json" rows="20" spellcheck="false" aria-describedby="project-error"></textarea><button id="apply-json" class="btn">Apply JSON</button>
+      </section>
+    </fieldset>
+    <div class="dialog-footer"><div class="history-actions" role="group" aria-label="Project edit history"><button id="project-undo" class="btn btn-quiet btn-icon" aria-label="Undo last edit" disabled><span class="icon icon-undo" aria-hidden="true"></span></button><button id="project-redo" class="btn btn-quiet btn-icon" aria-label="Redo last edit" disabled><span class="icon icon-redo" aria-hidden="true"></span></button></div><span id="project-saved-state" class="hint">Loading…</span><button id="save-project" class="btn"><span class="icon icon-save" aria-hidden="true"></span>Save project</button><button id="done-project" class="btn btn-primary">Done</button></div>
+  </dialog>
+  <button id="panel-backdrop" class="panel-backdrop" aria-label="Close panel" tabindex="-1" hidden></button>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

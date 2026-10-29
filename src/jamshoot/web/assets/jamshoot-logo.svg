@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1280" viewBox="0 0 1280 1280" fill="none">
+  <title>Jamshoot</title>
+  <defs>
+    <linearGradient id="body" x1="435" y1="70" x2="706" y2="1184" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffea00" />
+      <stop offset=".19" stop-color="#ff7400" />
+      <stop offset=".38" stop-color="#ff075a" />
+      <stop offset=".57" stop-color="#fa00bd" />
+      <stop offset=".77" stop-color="#a000ec" />
+      <stop offset="1" stop-color="#4500db" />
+    </linearGradient>
+    <radialGradient id="pink" cx="0" cy="0" r="1" gradientTransform="translate(1087 443) rotate(128) scale(647 573)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff0055" />
+      <stop offset=".49" stop-color="#ff006d" stop-opacity=".8" />
+      <stop offset="1" stop-color="#ff00bd" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="violet" cx="0" cy="0" r="1" gradientTransform="translate(367 1044) rotate(-53) scale(447 319)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3900d8" />
+      <stop offset=".55" stop-color="#5300df" />
+      <stop offset="1" stop-color="#6900f5" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff" />
+      <stop offset=".48" stop-color="#fff" stop-opacity=".94" />
+      <stop offset="1" stop-color="#fff" stop-opacity=".15" />
+    </linearGradient>
+    <linearGradient id="orange" x1="104" y1="390" x2="219" y2="545" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffe500" />
+      <stop offset=".48" stop-color="#ff9700" />
+      <stop offset="1" stop-color="#ff152b" />
+    </linearGradient>
+    <linearGradient id="orb" x1="702" y1="1029" x2="789" y2="1150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a000f1" />
+      <stop offset="1" stop-color="#7200c6" />
+    </linearGradient>
+    <path id="splash" d="M458 35 C369 38 291 111 279 198 C267 273 303 320 355 368 C402 413 433 454 419 496 C408 528 375 532 336 548 C276 570 241 615 241 662 C238 730 289 780 353 793 C417 807 457 774 502 787 C541 797 559 826 539 851 C516 881 469 868 420 865 C347 858 291 879 247 923 C179 987 162 1056 199 1125 C236 1195 312 1224 404 1217 C502 1213 550 1168 582 1101 C607 1049 622 1000 671 955 C727 904 770 917 823 966 C866 1007 893 1028 961 1027 C1038 1027 1107 986 1118 926 C1132 856 1090 797 1033 778 C981 761 935 766 905 739 C879 716 882 683 902 657 C932 621 984 611 1041 598 C1133 578 1190 530 1203 455 C1219 373 1188 295 1125 253 C1068 216 1005 226 965 240 C906 261 870 302 845 357 C820 412 803 445 761 457 C717 470 675 450 653 416 C626 375 627 332 640 281 C655 224 651 180 632 139 C601 69 532 30 458 35 Z" />
+    <clipPath id="splash-edge">
+      <use href="#splash" />
+    </clipPath>
+    <linearGradient id="edge" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".48" />
+      <stop offset=".45" stop-color="#fff" stop-opacity=".18" />
+      <stop offset="1" stop-color="#fff" stop-opacity=".30" />
+    </linearGradient>
+    <clipPath id="orange-edge">
+      <path d="M164 372 C107 372 65 414 61 462 C56 517 103 558 155 562 C212 567 260 530 267 482 C276 427 226 373 164 372 Z" />
+    </clipPath>
+    <clipPath id="orb-edge">
+      <path d="M745 1019 C701 1018 666 1050 666 1090 C666 1132 701 1165 746 1165 C790 1166 823 1134 823 1092 C823 1051 789 1020 745 1019 Z" />
+    </clipPath>
+  </defs>
+  <use href="#splash" fill="url(#body)" />
+  <use href="#splash" fill="url(#pink)" />
+  <use href="#splash" fill="url(#violet)" />
+  <use href="#splash" stroke="url(#edge)" stroke-width="24" stroke-linejoin="round" clip-path="url(#splash-edge)" />
+  <path d="M314 191 C323 125 386 62 457 60 C492 58 522 68 519 86 C517 100 504 107 486 107 C419 104 362 153 350 212 C339 222 315 207 314 191 Z" fill="url(#shine)" />
+  <path d="M743 486 C803 477 833 435 861 382 C894 315 939 267 1001 257 C1033 252 1058 256 1066 269 C1075 287 1058 301 1041 301 C973 302 919 343 879 410 C847 464 814 504 756 514 C726 519 721 493 743 486 Z" fill="url(#shine)" />
+  <path d="M232 1004 C251 943 310 898 372 891 C395 889 420 890 419 903 C418 914 400 914 383 916 C319 922 275 962 259 1014 C257 1026 252 1030 241 1025 C231 1021 227 1017 232 1004 Z" fill="url(#shine)" />
+  <path d="M164 372 C107 372 65 414 61 462 C56 517 103 558 155 562 C212 567 260 530 267 482 C276 427 226 373 164 372 Z" fill="url(#orange)" clip-path="url(#orange-edge)" stroke="url(#edge)" stroke-width="14" stroke-linejoin="round" />
+  <path d="M98 432 C111 405 144 383 178 392 C202 398 203 423 179 424 C151 423 125 434 115 451 C106 452 97 442 98 432 Z" fill="url(#shine)" />
+  <path d="M745 1019 C701 1018 666 1050 666 1090 C666 1132 701 1165 746 1165 C790 1166 823 1134 823 1092 C823 1051 789 1020 745 1019 Z" fill="url(#orb)" clip-path="url(#orb-edge)" stroke="url(#edge)" stroke-width="14" stroke-linejoin="round" />
+  <path d="M693 1070 C699 1050 723 1034 740 1037 C753 1038 754 1052 739 1056 C721 1062 711 1071 705 1086 C699 1083 690 1078 693 1070 Z" fill="url(#shine)" />
+</svg>

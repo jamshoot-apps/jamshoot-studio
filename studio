@@ -1,0 +1,19 @@
+#!/bin/sh
+# One command for the local Studio: ./studio [jamshoot studio options]
+# Creates .venv, installs the web extra and opens the browser on the folder chosen
+# in Studio's settings, else on ./projects. Text is drawn with an installed font;
+# nothing is downloaded.
+set -eu
+cd "$(dirname "$0")"
+
+if [ ! -x .venv/bin/python ]; then
+  python3 -m venv .venv
+fi
+if [ ! -x .venv/bin/jamshoot ] || ! .venv/bin/python -c 'import bottle' >/dev/null 2>&1; then
+  if ! .venv/bin/python -m pip --version >/dev/null 2>&1; then
+    .venv/bin/python -m ensurepip --upgrade
+  fi
+  .venv/bin/python -m pip install --quiet -e '.[web]'
+fi
+
+exec .venv/bin/jamshoot studio --fallback-home . --open "$@"

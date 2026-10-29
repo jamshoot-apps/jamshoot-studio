@@ -1,0 +1,32 @@
+@layer ds.components {
+  h3,
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+  }
+
+  h3 {
+    margin-bottom: var(--ds-space-xs);
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ds-space-2xs);
+    margin-bottom: var(--ds-space-xs);
+  }
+
+  .section-heading h3 {
+    margin: 0;
+  }
+
+  .section-hint {
+    margin: calc(-1 * var(--ds-space-3xs)) 0 var(--ds-space-xs);
+  }
+
+  .subsection-heading {
+    margin-top: var(--ds-space-md);
+  }
+}

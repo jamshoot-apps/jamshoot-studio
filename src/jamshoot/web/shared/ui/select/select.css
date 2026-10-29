@@ -1,0 +1,169 @@
+/* Styled select over the native <select> (select.js). */
+@layer ds.components {
+  .select {
+    position: relative;
+    min-width: 0;
+  }
+
+  .select-native {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .select-trigger {
+    justify-content: space-between;
+    gap: var(--ds-space-2xs);
+    width: 100%;
+    padding: 0 var(--ds-space-2xs) 0 var(--ds-space-xs);
+    font-weight: var(--ds-weight-regular);
+    text-align: left;
+  }
+
+  .select-trigger:hover:not(:disabled) {
+    background: var(--ds-surface);
+  }
+
+  .select-trigger:disabled {
+    background: var(--ds-surface-sunken);
+    color: var(--ds-text-muted);
+    opacity: 1;
+  }
+
+  .select-value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select-trigger.is-placeholder .select-value {
+    color: var(--ds-text-muted);
+  }
+
+  .select-trigger > .icon {
+    --ds-icon-size: var(--ds-icon-sm);
+    color: var(--ds-text-muted);
+    transition: transform var(--ds-motion-quick) var(--ds-ease-out);
+  }
+
+  .select.is-open .select-trigger {
+    border-color: var(--ds-accent);
+  }
+
+  :where(.select.is-open) .select-trigger > .icon {
+    transform: rotate(180deg);
+  }
+
+  .select-menu {
+    position: fixed;
+    inset: auto;
+    max-width: min(var(--ds-measure-md), calc(100vw - 2 * var(--ds-space-2xs)));
+    max-height: min(var(--ds-measure-md), calc(100dvh - 2 * var(--ds-space-2xs)));
+    margin: 0;
+    padding: var(--ds-space-3xs);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface-raised);
+    color: var(--ds-text);
+    box-shadow: var(--studio-shadow-overlay);
+    font-size: var(--ds-text-caption);
+  }
+
+  .select-group {
+    padding: var(--ds-space-2xs) var(--ds-space-2xs) var(--ds-space-3xs);
+    color: var(--ds-text-faint);
+    font-size: var(--ds-text-micro);
+    font-weight: var(--ds-weight-semibold);
+    letter-spacing: var(--ds-tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .select-option {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    min-height: var(--studio-control-sm);
+    padding: var(--ds-space-3xs) var(--ds-space-2xs);
+    border-radius: var(--studio-radius-inner);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .select-option > span:not(.icon, .select-swatch, .select-detail) {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select-option > .icon {
+    --ds-icon-size: var(--ds-icon-sm);
+    color: var(--ds-accent);
+    visibility: hidden;
+  }
+
+  .select-option[aria-selected="true"] {
+    color: var(--ds-accent);
+    font-weight: var(--ds-weight-medium);
+  }
+
+  .select-option:where([aria-selected="true"]) > .icon {
+    visibility: visible;
+  }
+
+  .select-option.is-active {
+    background: var(--studio-hover);
+  }
+
+  .select-option[aria-disabled="true"] {
+    opacity: var(--studio-disabled);
+    cursor: default;
+  }
+
+  /* A command after the choices, such as "Add language…". */
+  .select-option:has(> .icon-add:first-child) {
+    margin-top: var(--ds-space-3xs);
+    border-top: var(--studio-rule);
+    border-radius: 0 0 var(--studio-radius-inner) var(--studio-radius-inner);
+    color: var(--ds-accent);
+  }
+
+  .select-option > .icon-add:first-child {
+    visibility: visible;
+  }
+
+  .select-detail {
+    flex: none;
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-regular);
+  }
+
+  .select-swatch {
+    flex: none;
+    width: var(--ds-icon-md);
+    height: var(--ds-icon-md);
+    border-radius: var(--ds-radius-pill);
+    box-shadow: var(--studio-edge);
+  }
+
+  /* An action menu (data-menu): a quiet accent button such as "+ Add size". */
+  .select.is-menu {
+    display: inline-block;
+  }
+
+  .select.is-menu .select-trigger {
+    width: auto;
+    color: var(--ds-accent);
+  }
+
+  .select.is-menu .select-trigger > .icon {
+    color: inherit;
+  }
+}

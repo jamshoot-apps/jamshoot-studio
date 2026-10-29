@@ -1,0 +1,109 @@
+/* Slide cards in the slides list (slides.js updateSlideList()). */
+@layer ds.components {
+  .slide-card {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: var(--ds-space-2xs);
+    border-color: transparent;
+    border-radius: var(--ds-radius-md);
+    background: transparent;
+    font-weight: var(--ds-weight-regular);
+    line-height: var(--ds-leading-body);
+    text-align: left;
+    white-space: normal;
+  }
+
+  .slide-card:hover {
+    background: var(--ds-surface-sunken);
+  }
+
+  .slide-card[aria-current="true"] {
+    border-color: var(--ds-accent);
+    background: var(--studio-selected);
+  }
+
+  .slide-thumb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: var(--thumb-aspect, 1.6);
+    overflow: hidden;
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-bg);
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+  }
+
+  .slide-thumb img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .slide-caption {
+    display: flex;
+    align-items: baseline;
+    gap: var(--ds-space-2xs);
+    margin-top: var(--ds-space-2xs);
+    padding-inline: var(--ds-space-3xs);
+  }
+
+  .slide-caption > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .slide-number {
+    color: var(--ds-text-faint);
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+  }
+}
+
+@layer studio {
+  /* Slides list. */
+  .slide-controls {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .slides {
+    display: grid;
+    flex: 1;
+    align-content: start;
+    gap: var(--ds-space-3xs);
+    margin: 0;
+    padding: var(--ds-space-2xs);
+    list-style: none;
+  }
+
+  .slide-footer {
+    position: sticky;
+    bottom: 0;
+    display: grid;
+    gap: var(--ds-space-2xs);
+    padding: var(--ds-space-xs);
+    border-top: var(--studio-rule);
+    background: var(--ds-surface);
+  }
+
+  .add-slide {
+    width: 100%;
+  }
+
+  .slide-actions {
+    display: flex;
+    gap: var(--ds-space-3xs);
+  }
+
+  .slide-actions #remove-slide {
+    margin-left: auto;
+  }
+}

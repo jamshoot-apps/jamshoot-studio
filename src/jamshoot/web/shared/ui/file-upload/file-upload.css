@@ -1,0 +1,29 @@
+@layer ds.components {
+  .upload-box {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-xs);
+    margin-top: var(--ds-space-xs);
+    padding: var(--ds-space-xs);
+    border: var(--ds-hairline) dashed var(--ds-border-strong);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface-sunken);
+    font-weight: var(--ds-weight-medium);
+    cursor: pointer;
+  }
+
+  .upload-box:hover {
+    border-color: var(--ds-accent);
+    background: var(--studio-selected);
+  }
+
+  .upload-box > .icon {
+    --ds-icon-size: var(--ds-icon-lg);
+    color: var(--ds-accent);
+  }
+
+  input[type="file"]:focus-visible + .upload-box {
+    outline: var(--studio-focus);
+    outline-offset: var(--ds-focus-offset);
+  }
+}

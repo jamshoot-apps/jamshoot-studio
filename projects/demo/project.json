@@ -1,0 +1,56 @@
+{
+  "$schema": "./project.schema.json",
+  "version": 1,
+  "project": {
+    "name": "Demo App"
+  },
+  "targets": [
+    "appstore.iphone.1179x2556"
+  ],
+  "locales": [
+    "en-US"
+  ],
+  "defaults": {
+    "layout": "auto",
+    "pattern": "dots",
+    "seed": "launch"
+  },
+  "slides": [
+    {
+      "id": "overview",
+      "copy": {
+        "en-US": {
+          "headline": "Your app at a glance"
+        }
+      },
+      "assets": {
+        "iphone": "./assets/screenshot.png"
+      },
+      "name": "Slide 1"
+    },
+    {
+      "id": "organize",
+      "copy": {
+        "en-US": {
+          "headline": "Everything in one place"
+        }
+      },
+      "assets": {
+        "iphone": "./assets/screenshot.png"
+      },
+      "name": "Slide 2"
+    },
+    {
+      "id": "share",
+      "copy": {
+        "en-US": {
+          "headline": "Share in a tap"
+        }
+      },
+      "assets": {
+        "iphone": "./assets/screenshot.png"
+      },
+      "name": "Slide 3"
+    }
+  ]
+}

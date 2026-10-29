@@ -1,0 +1,62 @@
+/* Modal dialog chrome and the transient toast. */
+@layer ds.components {
+  .dialog {
+    padding: 0;
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-lg);
+    background: var(--ds-surface-raised);
+    color: var(--ds-text);
+    box-shadow: var(--studio-shadow-overlay);
+  }
+
+  .dialog::backdrop {
+    background: var(--studio-backdrop);
+  }
+
+  .dialog-heading,
+  .dialog-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    padding: var(--ds-space-sm) var(--ds-space-sm) var(--ds-space-sm) var(--ds-space-md);
+  }
+
+  .dialog-heading {
+    justify-content: space-between;
+  }
+
+  .dialog-heading h2 {
+    font-size: var(--ds-text-small);
+  }
+
+  .dialog-body {
+    padding: 0 var(--ds-space-md) var(--ds-space-md);
+  }
+
+  .dialog-footer {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding-bottom: max(var(--ds-space-sm), env(safe-area-inset-bottom));
+    border-top: var(--studio-rule);
+  }
+
+  .dialog-footer .hint {
+    flex: 1;
+    margin: 0;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: var(--ds-space-lg);
+    left: 50%;
+    z-index: var(--ds-layer-top);
+    max-width: calc(100% - 2 * var(--ds-space-sm));
+    padding: var(--ds-space-xs) var(--ds-space-md);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-text);
+    color: var(--ds-surface);
+    box-shadow: var(--studio-shadow-overlay);
+    overflow-wrap: anywhere;
+    transform: translateX(-50%);
+  }
+}

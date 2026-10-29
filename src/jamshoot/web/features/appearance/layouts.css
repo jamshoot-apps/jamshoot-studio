@@ -1,0 +1,17 @@
+@layer studio {
+  .layout-group .choice-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Frame and fit options under the device layouts. */
+  .device-settings {
+    display: grid;
+    gap: var(--ds-space-sm);
+    margin-top: var(--ds-space-sm);
+  }
+
+  .device-settings .choice-group + .choice-group {
+    margin-top: 0;
+  }
+}

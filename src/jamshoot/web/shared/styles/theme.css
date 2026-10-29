@@ -1,0 +1,65 @@
+/*
+ * Palettes: twelve shared color roles plus color-scheme, and Studio's
+ * own colors under the --studio- prefix. tests/test_design.py measures every role
+ * against every surface (WCAG 2.2 AA) in both palettes.
+ */
+@layer ds.theme {
+  :root {
+    color-scheme: light;
+
+    --ds-bg: #e9edeb;
+    --ds-surface: #ffffff;
+    --ds-surface-raised: #ffffff;
+    --ds-surface-sunken: #f4f7f5;
+
+    --ds-text: #1f2d28;
+    --ds-text-muted: #55625d;
+    --ds-text-faint: #5e6a65;
+
+    --ds-accent: #24644f;
+    --ds-accent-strong: #1b4d3d;
+    --ds-on-accent: #ffffff;
+
+    --ds-border: rgb(31 45 40 / 0.13);
+    --ds-border-strong: rgb(31 45 40 / 0.55);
+
+    --studio-danger: #a32e36;
+    --studio-warning: #9a5b00;
+    /* Spacing guides sit on the rendered image, so they keep one color in both palettes. */
+    --studio-guide: #f0457a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+
+      --ds-bg: #0c100f;
+      --ds-surface: #141a18;
+      --ds-surface-raised: #1b2321;
+      --ds-surface-sunken: #101513;
+
+      --ds-text: #eef3f1;
+      --ds-text-muted: #a8b4af;
+      --ds-text-faint: #8d9994;
+
+      --ds-accent: #5cc39f;
+      --ds-accent-strong: #7fd4b6;
+      --ds-on-accent: #05201a;
+
+      --ds-border: rgb(238 243 241 / 0.11);
+      --ds-border-strong: rgb(238 243 241 / 0.44);
+
+      --studio-danger: #ff8f94;
+      --studio-warning: #f2b45a;
+      --studio-guide: #f0457a;
+    }
+  }
+
+  /* State fills are mixed from the roles, so they follow every palette. */
+  :root {
+    --studio-hover: color-mix(in srgb, var(--ds-text) 6%, var(--ds-surface));
+    --studio-selected: color-mix(in srgb, var(--ds-accent) 12%, var(--ds-surface));
+    --studio-danger-surface: color-mix(in srgb, var(--studio-danger) 10%, var(--ds-surface));
+    --studio-danger-border: color-mix(in srgb, var(--studio-danger) 35%, var(--ds-surface));
+  }
+}

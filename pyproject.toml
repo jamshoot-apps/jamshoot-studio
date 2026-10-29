@@ -1,0 +1,115 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jamshoot-studio"
+dynamic = ["version"]
+description = "JamShoot Studio: local-first App Store screenshot tooling for humans, agents and CI"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "JamShoot" }]
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.23,<5", "Pillow>=13.0.0,<14"]
+keywords = ["app-store", "screenshots", "pillow", "cli", "ios", "macos"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Console",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Graphics",
+]
+
+[project.urls]
+Repository = "https://github.com/jamshoot-apps/jamshoot-studio"
+Issues = "https://github.com/jamshoot-apps/jamshoot-studio/issues"
+Changelog = "https://github.com/jamshoot-apps/jamshoot-studio/blob/main/CHANGELOG.md"
+
+[project.scripts]
+jamshoot = "jamshoot.cli:main"
+
+[project.optional-dependencies]
+web = ["bottle>=0.13,<0.14"]
+dev = [
+  "build>=1.2,<2",
+  "ruff>=0.14,<1",
+  "black>=26,<27",
+  "mypy>=2,<3",
+  "pyright>=1.1.400,<2",
+  "pylint>=4,<5",
+  "types-jsonschema>=4.23",
+  "types-PyYAML>=6",
+  "PyYAML>=6,<7",
+  "mkdocs>=1.6,<2",
+]
+
+[tool.hatch.version]
+path = "src/jamshoot/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jamshoot"]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "src", "tests", "typings", ".github", "studio",
+  "package.json", "package-lock.json", "biome.json", ".fallowrc.json", ".gitignore",
+  "README.md", "SECURITY.md", "CONTRIBUTING.md", "LICENSE", "pyproject.toml", "mkdocs.yml",
+  "CHANGELOG.md", "docs",
+  "projects/demo/project.json", "projects/demo/project.schema.json",
+  "projects/demo/assets/screenshot.png",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+# tests/support.py and tests/studio_case.py are the suite's own modules; Pylint agrees.
+known-first-party = ["support", "studio_case"]
+
+# Black and `ruff format` share one style: 100 columns, Python 3.11 syntax.
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src", "tests"]
+# Local stubs for dependencies that ship no type information (Bottle).
+mypy_path = "typings"
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+
+[tool.pyright]
+include = ["src", "tests"]
+exclude = ["**/__pycache__"]
+stubPath = "typings"
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+# The documented development venv, so imports resolve without activating it. Where it
+# is absent (CI), Pyright notes that and uses the `python` on PATH.
+venvPath = "."
+venv = ".venv"
+
+[tool.pylint.main]
+py-version = "3.11"
+jobs = 0
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint.imports]
+known-first-party = ["support", "studio_case"]

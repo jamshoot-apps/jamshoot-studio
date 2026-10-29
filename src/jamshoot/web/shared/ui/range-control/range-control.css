@@ -1,0 +1,30 @@
+@layer ds.components {
+  .range-control {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--ds-space-4xl);
+    align-items: center;
+    gap: var(--ds-space-3xs) var(--ds-space-xs);
+    margin-block: var(--ds-space-xs);
+  }
+
+  .range-control label {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-weight: var(--ds-weight-regular);
+  }
+
+  .range-control input[type="range"] {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    accent-color: var(--ds-accent);
+    cursor: pointer;
+  }
+
+  .range-control input[type="number"] {
+    min-height: var(--studio-control-sm);
+    padding: var(--ds-space-3xs) var(--ds-space-2xs);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+}

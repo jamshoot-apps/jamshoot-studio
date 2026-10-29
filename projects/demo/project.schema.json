@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JamShoot Studio project",
+  "description": "Portable local screenshot project. Paths are relative to this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "project", "targets", "locales", "defaults", "slides"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"type": "integer", "const": 1},
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {"$ref": "#/$defs/text"},
+        "icon": {"$ref": "#/$defs/asset"}
+      }
+    },
+    "targets": {
+      "type": "array", "minItems": 1, "maxItems": 64, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1, "maxLength": 128}
+    },
+    "locales": {
+      "type": "array", "minItems": 1, "maxItems": 100, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/locale"}
+    },
+    "colorStyles": {
+      "type": "array", "maxItems": 100,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "name", "colors"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+          "colors": {"allOf": [{"$ref": "#/$defs/colors"}, {"required": ["top", "bottom", "accent", "text", "muted", "frame"]}]},
+          "gradient": {"$ref": "#/$defs/gradient"}
+        }
+      }
+    },
+    "layoutStyles": {
+      "type": "array", "maxItems": 100,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "name", "layoutSettings"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+          "layoutSettings": {"$ref": "#/$defs/layoutSettings"}
+        }
+      }
+    },
+    "defaults": {
+      "type": "object", "additionalProperties": false,
+      "required": ["layout", "pattern", "seed"],
+      "properties": {
+        "layout": {"$ref": "#/$defs/layout"},
+        "pattern": {"$ref": "#/$defs/pattern"},
+        "seed": {"$ref": "#/$defs/text"},
+        "deviceFrame": {"$ref": "#/$defs/deviceFrame"},
+        "screenshotFit": {"$ref": "#/$defs/screenshotFit"},
+        "labelStyle": {"$ref": "#/$defs/labelStyle"},
+        "colorStyle": {"$ref": "#/$defs/colorStyle"},
+        "colors": {"$ref": "#/$defs/colors"},
+        "patternSettings": {"$ref": "#/$defs/patternSettings"},
+        "gradient": {"$ref": "#/$defs/gradient"},
+        "glows": {"$ref": "#/$defs/glows"},
+        "layoutStyle": {"$ref": "#/$defs/layoutStyle"},
+        "layoutSettings": {"$ref": "#/$defs/layoutSettings"},
+        "typography": {"$ref": "#/$defs/typography"}
+      }
+    },
+    "slides": {
+      "type": "array", "minItems": 1, "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "copy", "assets"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "style": {"$ref": "#/$defs/style"},
+          "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+          "copy": {
+            "type": "object", "minProperties": 1,
+            "propertyNames": {"$ref": "#/$defs/locale"},
+            "additionalProperties": {
+              "type": "object", "additionalProperties": false, "required": ["headline"],
+              "properties": {
+                "headline": {"$ref": "#/$defs/text"},
+                "subtitle": {"type": "string", "maxLength": 2000},
+                "featureLabel": {"type": "string", "maxLength": 200}
+              }
+            }
+          },
+          "assets": {
+            "type": "object",
+            "propertyNames": {"enum": ["mac", "iphone", "iphone-duo", "ipad", "custom", "tv", "vision", "watch"]},
+            "additionalProperties": {
+              "oneOf": [
+                {"$ref": "#/$defs/asset"},
+                {
+                  "type": "object", "minProperties": 1,
+                  "propertyNames": {"$ref": "#/$defs/locale"},
+                  "additionalProperties": {"$ref": "#/$defs/asset"}
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array", "minItems": 1, "maxItems": 100,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id"],
+        "properties": {
+          "id": {"$ref": "#/$defs/id"},
+          "layout": {"$ref": "#/$defs/layout"},
+          "pattern": {"$ref": "#/$defs/pattern"},
+          "seed": {"$ref": "#/$defs/text"},
+          "deviceFrame": {"$ref": "#/$defs/deviceFrame"},
+          "screenshotFit": {"$ref": "#/$defs/screenshotFit"},
+          "labelStyle": {"$ref": "#/$defs/labelStyle"},
+          "colorStyle": {"$ref": "#/$defs/colorStyle"},
+          "colors": {"$ref": "#/$defs/colors"},
+          "patternSettings": {"$ref": "#/$defs/patternSettings"},
+          "gradient": {"$ref": "#/$defs/gradient"},
+          "glows": {"$ref": "#/$defs/glows"},
+          "layoutStyle": {"$ref": "#/$defs/layoutStyle"},
+          "layoutSettings": {"$ref": "#/$defs/layoutSettings"},
+          "typography": {"$ref": "#/$defs/typography"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "style": {
+      "type": "object", "additionalProperties": false,
+      "description": "Overrides for this slide across all locales and variants.",
+      "properties": {
+        "layout": {"$ref": "#/$defs/layout"},
+        "pattern": {"$ref": "#/$defs/pattern"},
+        "seed": {"$ref": "#/$defs/text"},
+        "deviceFrame": {"$ref": "#/$defs/deviceFrame"},
+        "screenshotFit": {"$ref": "#/$defs/screenshotFit"},
+        "labelStyle": {"$ref": "#/$defs/labelStyle"},
+        "colorStyle": {"$ref": "#/$defs/colorStyle"},
+        "colors": {"$ref": "#/$defs/colors"},
+        "patternSettings": {"$ref": "#/$defs/patternSettings"},
+        "gradient": {"$ref": "#/$defs/gradient"},
+        "glows": {"$ref": "#/$defs/glows"},
+        "layoutStyle": {"$ref": "#/$defs/layoutStyle"},
+        "layoutSettings": {"$ref": "#/$defs/layoutSettings"},
+        "typography": {"$ref": "#/$defs/typography"}
+      }
+    },
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$"},
+    "locale": {"type": "string", "pattern": "^(?![\\s.])(?!.*[\\s.]$)[^/\\\\:*?\"<>|\\u0000-\\u001f]+$", "maxLength": 64},
+    "text": {"type": "string", "minLength": 1, "maxLength": 2000, "pattern": "\\S"},
+    "asset": {"type": "string", "minLength": 1, "maxLength": 1024},
+    "layout": {"enum": ["auto", "window-top", "device-top", "device-focus", "raw"]},
+    "deviceFrame": {"enum": ["black", "silver", "none"]},
+    "screenshotFit": {"enum": ["contain", "cover"]},
+    "labelStyle": {"enum": ["text", "badge"], "description": "How the feature label is drawn: plain text, or a tinted pill with a dot in the accent color."},
+    "colorStyle": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "color": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "colors": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "top": {"$ref": "#/$defs/color"}, "bottom": {"$ref": "#/$defs/color"},
+        "accent": {"$ref": "#/$defs/color"}, "text": {"$ref": "#/$defs/color"},
+        "muted": {"$ref": "#/$defs/color"}, "frame": {"$ref": "#/$defs/color"}
+      }
+    },
+    "patternSettings": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "density": {"type": "number", "minimum": 0, "maximum": 100},
+        "opacity": {"type": "number", "minimum": 0, "maximum": 100},
+        "scale": {"type": "number", "minimum": 10, "maximum": 220},
+        "rotation": {"type": "number", "minimum": -180, "maximum": 180},
+        "strokeWidth": {"type": "number", "minimum": 0.25, "maximum": 6},
+        "amplitude": {"type": "number", "minimum": 0, "maximum": 100}
+      }
+    },
+    "gradient": {
+      "type": "object", "additionalProperties": false,
+      "description": "How the background is filled: from the top (start) to the bottom (end) color, or through stops.",
+      "properties": {
+        "kind": {"enum": ["linear", "radial", "solid"]},
+        "angle": {"type": "number", "minimum": 0, "maximum": 360},
+        "centerX": {"type": "number", "minimum": 0, "maximum": 100},
+        "centerY": {"type": "number", "minimum": 0, "maximum": 100},
+        "radius": {"type": "number", "minimum": 20, "maximum": 200},
+        "midpoint": {"type": "number", "minimum": 5, "maximum": 95, "description": "Where top and bottom mix evenly; ignored when stops are set."},
+        "stops": {
+          "type": "array", "minItems": 2, "maxItems": 8,
+          "description": "Colors along the gradient, in % of its length; beyond the outer stops their colors fill solid.",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["color", "position"],
+            "properties": {
+              "color": {"$ref": "#/$defs/color"},
+              "position": {"type": "number", "minimum": 0, "maximum": 100}
+            }
+          }
+        }
+      }
+    },
+    "glows": {
+      "type": "array", "maxItems": 8,
+      "description": "Soft light painted over the fill and under the pattern; a list replaces the inherited one as a whole.",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["x", "y", "radius", "color", "opacity", "blur"],
+        "properties": {
+          "x": {"type": "number", "minimum": -50, "maximum": 150, "description": "Center, % of the canvas width."},
+          "y": {"type": "number", "minimum": -50, "maximum": 150, "description": "Center, % of the canvas height."},
+          "radius": {"type": "number", "minimum": 1, "maximum": 100, "description": "% of the canvas short side."},
+          "color": {"$ref": "#/$defs/color"},
+          "opacity": {"type": "number", "minimum": 0, "maximum": 100},
+          "blur": {"type": "number", "minimum": 0, "maximum": 30, "description": "% of the canvas short side."}
+        }
+      }
+    },
+    "layoutStyle": {"anyOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "layoutSettings": {
+      "type": "object", "additionalProperties": false,
+      "description": "Text and screenshot geometry. Vertical spacing is % of the canvas height; widths are % of its width.",
+      "properties": {
+        "topMargin": {"type": "number", "minimum": 0, "maximum": 30},
+        "labelGap": {"type": "number", "minimum": 0, "maximum": 10},
+        "subtitleGap": {"type": "number", "minimum": 0, "maximum": 10},
+        "textWidth": {"type": "number", "minimum": 30, "maximum": 100},
+        "screenshotGap": {"type": "number", "minimum": 0, "maximum": 30},
+        "screenshotTop": {"type": "number", "minimum": 0, "maximum": 80, "description": "Where the screenshot's area starts, % of the canvas height, so slides keep one screenshot position and size whatever their text; longer text still pushes it down. 0 follows the text."},
+        "screenshotWidth": {"type": "number", "minimum": 30, "maximum": 100},
+        "bottomMargin": {"type": "number", "minimum": 0, "maximum": 20}
+      }
+    },
+    "typography": {
+      "type": "object", "additionalProperties": false,
+      "description": "Text settings per text field. Unset values follow the scope below, then the built-in values of the layout.",
+      "properties": {
+        "featureLabel": {"$ref": "#/$defs/text_style"},
+        "headline": {"$ref": "#/$defs/text_style"},
+        "subtitle": {"$ref": "#/$defs/text_style"}
+      }
+    },
+    "text_style": {
+      "type": "object", "additionalProperties": false,
+      "properties": {
+        "font": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S", "description": "A family from the project's assets/fonts folder or installed on the system; unset uses the built-in font."},
+        "size": {"type": "number", "minimum": 0.5, "maximum": 12, "description": "% of the canvas height."},
+        "weight": {"type": "number", "minimum": 100, "maximum": 900},
+        "lineHeight": {"type": "number", "minimum": 80, "maximum": 160, "description": "% of the font size."},
+        "letterSpacing": {"type": "number", "minimum": -10, "maximum": 40, "description": "% of the font size, added after each character."},
+        "uppercase": {"type": "boolean"}
+      }
+    },
+    "pattern": {"enum": ["none", "dots", "circles", "waves", "diagonal", "grid", "confetti", "arcs", "mesh", "crosshatch", "chevrons", "hexagons", "stars", "checkerboard"]}
+  }
+}

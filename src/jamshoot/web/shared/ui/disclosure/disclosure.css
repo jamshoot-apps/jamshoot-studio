@@ -1,0 +1,37 @@
+@layer ds.components {
+  summary {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    min-height: var(--studio-control);
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-medium);
+    list-style: none;
+    cursor: pointer;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: "";
+    flex: none;
+    width: var(--ds-icon-sm);
+    height: var(--ds-icon-sm);
+    background: currentColor;
+    opacity: 0.7;
+    -webkit-mask: url("/vendor/ionicons/chevron-down-outline.svg") center / contain no-repeat;
+    mask: url("/vendor/ionicons/chevron-down-outline.svg") center / contain no-repeat;
+    transform: rotate(-90deg);
+    transition: transform var(--ds-motion-quick) var(--ds-ease-out);
+  }
+
+  [open] > summary::before {
+    transform: none;
+  }
+
+  [open] > summary {
+    margin-bottom: var(--ds-space-2xs);
+  }
+}

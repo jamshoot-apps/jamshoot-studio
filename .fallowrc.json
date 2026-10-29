@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/fallow/schema.json",
+  "entry": [
+    "src/jamshoot/web/pages/editor/editor.html",
+    "src/jamshoot/web/pages/home/home.html",
+    "tests/unit.test.mjs"
+  ],
+  "ignorePatterns": ["src/jamshoot/web/vendor/**"],
+  "health": { "coverage": "coverage/node" }
+}
