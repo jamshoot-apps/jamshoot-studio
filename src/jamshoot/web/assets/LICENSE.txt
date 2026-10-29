@@ -1,0 +1,17 @@
+JamShoot brand assets
+Copyright (c) 2026 JamShoot. All rights reserved.
+
+The artwork in this directory is excluded from the repository's Apache License
+2.0. It is provided under the limited permission below.
+
+You may copy, redistribute and display the unmodified logo as part of JamShoot
+Studio's source repository, its packages and documentation, including
+screenshots of Studio and documentation builds, provided this notice accompanies
+it. Resizing for display is permitted.
+
+No permission is granted to adapt the artwork or use it as the branding of
+another product or service. Other uses require permission from JamShoot:
+hello@jamshoot.net. No trademark rights are granted by these terms.
+
+These terms do not restrict uses permitted by applicable law or revoke any
+rights granted for copies distributed under earlier licences.

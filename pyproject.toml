@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "JamShoot Studio: local-first App Store screenshot tooling for humans, agents and CI"
 readme = "README.md"
 license = "Apache-2.0"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "JamShoot" }]
 requires-python = ">=3.11"
 dependencies = ["jsonschema>=4.23,<5", "Pillow>=13.0.0,<14"]
@@ -61,7 +61,7 @@ packages = ["src/jamshoot"]
 only-include = [
   "src", "tests", "typings", ".github", "studio",
   "package.json", "package-lock.json", "biome.json", ".fallowrc.json", ".gitignore",
-  "README.md", "SECURITY.md", "CONTRIBUTING.md", "LICENSE", "pyproject.toml", "mkdocs.yml",
+  "README.md", "SECURITY.md", "CONTRIBUTING.md", "LICENSE", "NOTICE", "pyproject.toml", "mkdocs.yml",
   "CHANGELOG.md", "docs",
   "projects/demo/project.json", "projects/demo/project.schema.json",
   "projects/demo/assets/screenshot.png",

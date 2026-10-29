@@ -4,7 +4,11 @@ Compose App Store screenshots from your app screenshots, localized text and a
 portable JSON project, in a local browser editor or from the CLI for CI pipelines
 and LLM agents.
 
-![JamShoot Studio editor with a demo iPhone slide](docs/images/studio-editor.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/studio-editor-dark.webp">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/studio-editor-light.webp">
+  <img alt="JamShoot Studio editor with a demo iPhone slide" src="docs/images/studio-editor-light.webp">
+</picture>
 
 ## Features
 
@@ -54,6 +58,8 @@ see [CONTRIBUTING](CONTRIBUTING.md).
 
 Licensed under [Apache-2.0](LICENSE). Copyright 2026 JamShoot.
 The vendored Ionicons SVGs retain their [MIT license](src/jamshoot/web/vendor/ionicons/LICENSE).
+The JamShoot logo is excluded from Apache-2.0 and is provided under separate
+[brand terms](src/jamshoot/web/assets/LICENSE.txt); see [NOTICE](NOTICE).
 Runtime dependencies: jsonschema, Pillow and, for Studio, Bottle.
 
 Apple, App Store, iPhone, iPad and Mac are trademarks of Apple Inc., registered in

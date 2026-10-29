@@ -4,7 +4,7 @@ Studio is the local browser editor. Start it as described in [Install](install.m
 and open the exact `http://127.0.0.1:PORT` address it prints; `localhost` is
 rejected. Ctrl-C in the terminal stops it.
 
-![Studio editor with a demo iPhone slide](images/studio-editor.png)
+![Studio editor with a demo iPhone slide](images/studio-editor-light.webp)
 
 The editor has three areas: the **Slides** panel on the left, the preview in the
 middle and **Slide settings** on the right. The **Project** button in the top bar
