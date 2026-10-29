@@ -1,0 +1,25 @@
+{
+  "name": "jamshoot-studio-tools",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "author": "JamShoot",
+  "description": "Pinned development tools for Studio's browser code. Studio itself has no npm dependencies.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "biome ci && npm test && fallow",
+    "test": "node tests/run-unit.mjs",
+    "format": "biome check --write",
+    "dashboard": "code-shame"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "code-shame": "0.2.0",
+    "fallow": "3.34.0"
+  },
+  "overrides": {
+    "fallow": "$fallow"
+  }
+}

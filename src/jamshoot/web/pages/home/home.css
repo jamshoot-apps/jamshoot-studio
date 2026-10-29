@@ -1,0 +1,247 @@
+/* Start screen: the project library, mobile first. Controls come from the component stylesheets. */
+@layer studio {
+  body {
+    min-height: 100dvh;
+    background: var(--ds-bg);
+  }
+
+  /* The bar and the projects share one gutter, so the logo lines up with "Projects". */
+  .home-topbar {
+    position: sticky;
+    top: 0;
+    z-index: var(--ds-layer-chrome);
+    justify-content: space-between;
+    padding-inline: var(--ds-gutter);
+  }
+
+  .home-actions {
+    display: flex;
+    gap: var(--ds-space-2xs);
+  }
+
+  /* The full width, with the gap under the bar equal to the side gutter. */
+  .home {
+    padding: var(--ds-gutter);
+  }
+
+  .home-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-sm);
+    margin-bottom: var(--ds-space-lg);
+  }
+
+  .home-heading h1 {
+    font-size: var(--ds-text-subtitle);
+    font-weight: var(--ds-weight-semibold);
+    line-height: var(--ds-leading-snug);
+  }
+
+  .home-error,
+  .form-error {
+    padding: var(--ds-space-xs) var(--ds-space-sm);
+    border-radius: var(--ds-radius-sm);
+    background: var(--studio-danger-surface);
+    color: var(--studio-danger);
+    overflow-wrap: anywhere;
+  }
+
+  .home-error {
+    margin-bottom: var(--ds-space-sm);
+  }
+
+  .form-error {
+    margin-top: var(--ds-space-sm);
+  }
+
+  /* Project cards. */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--ds-measure-xs), 100%), 1fr));
+    gap: var(--ds-space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-lg);
+    background: var(--ds-surface);
+    transition:
+      border-color var(--ds-motion-quick) var(--ds-ease-out),
+      box-shadow var(--ds-motion-quick) var(--ds-ease-out);
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    border-color: var(--ds-border-strong);
+    box-shadow: var(--studio-shadow-raised);
+  }
+
+  .project-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project-link:focus-visible {
+    border-radius: var(--ds-radius-lg);
+    outline-offset: calc(-1 * var(--ds-focus-ring));
+  }
+
+  .project-link[aria-disabled="true"] {
+    cursor: default;
+  }
+
+  /* A definite track, so a tall screenshot scales into the 4:3 frame instead of stretching it. */
+  .project-thumb {
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    padding: var(--ds-space-xs);
+    background: var(--ds-surface-sunken);
+    color: var(--ds-text-muted);
+  }
+
+  .project-thumb > .icon {
+    --ds-icon-size: var(--ds-space-xl);
+    opacity: 0.5;
+  }
+
+  .project-thumb img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: var(--studio-shadow-raised);
+  }
+
+  .project-body {
+    display: block;
+    padding: var(--ds-space-xs) var(--ds-space-sm) var(--ds-space-sm);
+    overflow-wrap: anywhere;
+  }
+
+  .project-body strong {
+    display: block;
+    overflow: hidden;
+    font-size: var(--ds-text-small);
+    font-weight: var(--ds-weight-semibold);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .project-body .project-error {
+    color: var(--studio-danger);
+    overflow-wrap: anywhere;
+  }
+
+  .project-actions {
+    position: absolute;
+    right: var(--ds-space-2xs);
+    bottom: var(--ds-space-2xs);
+    display: flex;
+    padding: var(--ds-space-3xs);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface-raised);
+    color: var(--ds-text-muted);
+    box-shadow: var(--studio-shadow-raised);
+  }
+
+  /* With a mouse the card actions wait for the card; touch screens always show them. */
+  @media (hover: hover) {
+    .project-actions {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .project-card:hover .project-actions,
+    .project-card:has(.project-error) .project-actions,
+    .project-actions:focus-within {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* Dragging a file over the start screen shows where a project .zip lands. */
+  .drop-zone {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-layer-top);
+    display: grid;
+    padding: var(--ds-space-md);
+    background: var(--studio-backdrop);
+    pointer-events: none;
+  }
+
+  .drop-zone[hidden] {
+    display: none;
+  }
+
+  .drop-zone-target {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--ds-space-xs);
+    border: var(--ds-hairline) dashed var(--ds-accent);
+    border-radius: var(--ds-radius-lg);
+    background: var(--ds-surface-raised);
+    color: var(--ds-text);
+  }
+
+  .drop-zone-target .icon {
+    --ds-icon-size: var(--ds-space-2xl);
+    color: var(--ds-accent);
+  }
+
+  .empty-projects {
+    display: grid;
+    justify-items: center;
+    gap: var(--ds-space-2xs);
+    padding: var(--ds-space-xl) var(--ds-space-sm) var(--ds-space-4xl);
+    text-align: center;
+  }
+
+  .empty-projects > .icon {
+    --ds-icon-size: var(--ds-space-2xl);
+    color: var(--ds-text-muted);
+  }
+
+  .empty-projects h2 {
+    font-size: var(--ds-text-small);
+  }
+
+  .empty-projects .btn {
+    margin-top: var(--ds-space-xs);
+  }
+
+  /* New project dialog. */
+  .home-dialog {
+    width: min(var(--ds-measure-lg), calc(100% - 2 * var(--ds-space-sm)));
+  }
+
+  .platform-choice {
+    margin-top: var(--ds-space-md);
+  }
+
+  .platform-choice .choice-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (min-width: 34rem) {
+    .home-heading {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .home-heading input {
+      width: var(--ds-measure-xs);
+    }
+  }
+}

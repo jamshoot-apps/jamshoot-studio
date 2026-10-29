@@ -1,0 +1,23 @@
+site_name: JamShoot Studio
+site_description: Python App Store screenshot tooling — project documentation
+site_url: https://jamshoot-apps.github.io/jamshoot-studio/
+repo_url: https://github.com/jamshoot-apps/jamshoot-studio
+edit_uri: blob/main/docs/
+docs_dir: docs
+site_dir: site
+theme: readthedocs
+strict: true
+validation:
+  links:
+    anchors: warn
+    unrecognized_links: warn
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Studio: studio.md
+  - CLI: cli.md
+  - Project format: project-schema.md
+  - Rendering: rendering.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Development: development.md

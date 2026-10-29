@@ -1,0 +1,357 @@
+/* Color row and the shared HSV picker: a bottom sheet on phones, a popover beside its trigger. */
+@layer ds.components {
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    min-height: var(--studio-control);
+  }
+
+  .color-row > label {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    font-weight: var(--ds-weight-regular);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .color-row.is-overridden > label::after {
+    content: "";
+    display: inline-block;
+    width: var(--ds-space-2xs);
+    height: var(--ds-space-2xs);
+    margin-left: var(--ds-space-2xs);
+    border-radius: var(--ds-radius-pill);
+    background: var(--ds-accent);
+    vertical-align: calc(var(--ds-align-nudge) / 2);
+  }
+
+  .color-row-reset {
+    color: var(--ds-text-muted);
+  }
+
+  /* Keeps its place so rows stay aligned while there is nothing to reset. */
+  .color-row-reset:disabled {
+    visibility: hidden;
+  }
+
+  .color-row-trigger {
+    --studio-control: var(--studio-control-sm);
+    flex: none;
+    justify-content: flex-start;
+    width: var(--ds-space-5xl);
+    padding: 0 var(--ds-space-2xs) 0 var(--ds-space-3xs);
+    font-weight: var(--ds-weight-regular);
+  }
+
+  .color-row-swatch,
+  .color-picker-preview,
+  .color-picker-swatch {
+    flex: none;
+    border-radius: var(--ds-radius-pill);
+    box-shadow: var(--studio-edge);
+  }
+
+  .color-row-swatch {
+    width: var(--ds-icon-lg);
+    height: var(--ds-icon-lg);
+  }
+
+  .color-row-code {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+  }
+
+  .color-picker-dialog {
+    position: fixed;
+    inset: auto 0 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 90dvh;
+    margin: 0;
+    padding: 0 0 env(safe-area-inset-bottom);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: var(--ds-radius-lg) var(--ds-radius-lg) 0 0;
+  }
+
+  .color-picker-heading {
+    position: sticky;
+    top: 0;
+    z-index: var(--ds-layer-chrome);
+    padding: var(--ds-space-xs) var(--ds-space-sm);
+    border-bottom: var(--studio-rule);
+    background: var(--ds-surface-raised);
+  }
+
+  .color-picker-heading p,
+  .color-picker-body label,
+  .color-picker-body h3 {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+  }
+
+  .color-picker-body {
+    display: grid;
+    gap: var(--ds-space-xs);
+    padding: var(--ds-space-sm);
+  }
+
+  .color-picker-body label {
+    margin: 0;
+  }
+
+  .color-picker-body h3 {
+    margin-bottom: var(--ds-space-2xs);
+  }
+
+  .color-picker-plane {
+    position: relative;
+    height: var(--ds-measure-2xs);
+    border-radius: var(--ds-radius-sm);
+    background: var(--studio-tone-plane), var(--picker-color);
+    cursor: crosshair;
+    touch-action: none;
+  }
+
+  .color-picker-cursor {
+    position: absolute;
+    top: var(--picker-y);
+    left: var(--picker-x);
+    width: var(--ds-space-xs);
+    height: var(--ds-space-xs);
+    border: var(--studio-handle-ring);
+    border-radius: var(--ds-radius-pill);
+    box-shadow: var(--studio-handle-edge);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  /*
+   * The hue slider is a native range input with an invisible thumb, so keyboard and
+   * assistive technology keep native behavior; the visible handle is the plane's cursor,
+   * centered where the thumb sits: half a thumb in, then along the remaining width.
+   */
+  .color-picker-hue-track {
+    --picker-x: calc(var(--ds-icon-md) / 2 + (100% - var(--ds-icon-md)) * var(--picker-hue));
+    --picker-y: 50%;
+    position: relative;
+  }
+
+  .color-picker-hue-track .color-picker-cursor {
+    width: var(--ds-icon-md);
+    height: var(--ds-icon-md);
+  }
+
+  .color-picker-hue {
+    display: block;
+    width: 100%;
+    height: var(--ds-icon-lg);
+    margin: 0;
+    border-radius: var(--ds-radius-pill);
+    background: var(--studio-hue-track);
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .color-picker-hue::-webkit-slider-thumb {
+    width: var(--ds-icon-md);
+    height: var(--ds-icon-lg);
+    appearance: none;
+  }
+
+  .color-picker-hue::-moz-range-thumb {
+    width: var(--ds-icon-md);
+    border: 0;
+    opacity: 0;
+  }
+
+  .color-picker-channels {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--ds-space-xs);
+  }
+
+  .color-picker-channels > div,
+  .color-picker-hex > div {
+    display: grid;
+    gap: var(--ds-space-3xs);
+    min-width: 0;
+  }
+
+  .color-picker-hex {
+    display: flex;
+    align-items: end;
+    gap: var(--ds-space-xs);
+  }
+
+  .color-picker-hex > div {
+    flex: 1;
+  }
+
+  .color-picker-hex input {
+    font-family: var(--ds-font-mono);
+  }
+
+  .color-picker-preview {
+    width: var(--studio-control);
+    height: var(--studio-control);
+  }
+
+  .color-picker-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-2xs);
+    max-height: var(--ds-space-5xl);
+    padding: var(--ds-space-3xs);
+    overflow-y: auto;
+  }
+
+  .color-picker-swatch {
+    width: var(--studio-control);
+    height: var(--studio-control);
+    min-height: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* Background picker: fill type, stops on a bar and in a list, and geometry. */
+  .gradient-editor {
+    display: grid;
+    gap: var(--ds-space-xs);
+    padding-bottom: var(--ds-space-xs);
+    border-bottom: var(--studio-rule);
+  }
+
+  .gradient-editor[hidden],
+  .gradient-editor > [hidden],
+  .gradient-fields > [hidden] {
+    display: none;
+  }
+
+  .gradient-head,
+  .gradient-stops-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-3xs);
+  }
+
+  .gradient-head > .select,
+  .gradient-stops-heading > h4 {
+    flex: 1;
+    margin: 0;
+  }
+
+  /* Stops sit on the bar at their positions; the margins keep end stops inside the dialog. */
+  .gradient-bar {
+    position: relative;
+    height: var(--ds-icon-lg);
+    margin: 0 calc(var(--ds-icon-md) / 2);
+    border-radius: var(--ds-radius-sm);
+    box-shadow: var(--studio-edge);
+    cursor: copy;
+    touch-action: none;
+  }
+
+  .gradient-stop {
+    position: absolute;
+    top: 50%;
+    width: var(--ds-icon-md);
+    height: calc(var(--ds-icon-lg) + var(--ds-space-2xs));
+    min-height: 0;
+    padding: 0;
+    border: var(--studio-handle-ring);
+    border-radius: var(--ds-radius-sm);
+    box-shadow: var(--studio-handle-edge);
+    transform: translate(-50%, -50%);
+    cursor: ew-resize;
+  }
+
+  .gradient-stop[aria-pressed="true"] {
+    outline: var(--studio-focus);
+    outline-offset: var(--ds-focus-offset);
+  }
+
+  .gradient-stops {
+    display: grid;
+    gap: var(--ds-space-3xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gradient-stop-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) var(--ds-space-4xl) auto auto;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    padding: var(--ds-space-3xs);
+    border-radius: var(--ds-radius-sm);
+  }
+
+  .gradient-stop-row.is-selected {
+    background: var(--studio-selected);
+  }
+
+  .gradient-stop-swatch {
+    width: var(--ds-icon-lg);
+    height: var(--ds-icon-lg);
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: var(--studio-edge);
+  }
+
+  .gradient-stop-row input {
+    min-height: var(--studio-control-sm);
+    padding: var(--ds-space-3xs) var(--ds-space-2xs);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  .gradient-stop-code {
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+  }
+
+  .gradient-stop-unit {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+  }
+
+  .gradient-fields {
+    display: grid;
+  }
+
+  .color-picker-actions {
+    display: flex;
+    gap: var(--ds-space-2xs);
+  }
+
+  .color-picker-actions .btn {
+    flex: 1;
+  }
+
+  /* From 34rem the picker opens beside its trigger; color-picker.js sets the position. */
+  @media (min-width: 34rem) {
+    .color-picker-dialog {
+      inset: var(--picker-top, var(--ds-space-sm)) auto auto var(--picker-left, var(--ds-space-sm));
+      width: var(--ds-measure-sm);
+      max-width: calc(100vw - 2 * var(--ds-space-sm));
+      max-height: calc(100dvh - 2 * var(--ds-space-sm));
+      padding: 0;
+      border-radius: var(--ds-radius-md);
+    }
+
+    .color-picker-dialog::backdrop {
+      background: transparent;
+    }
+
+    .color-picker-swatch {
+      width: var(--studio-control-sm);
+      height: var(--studio-control-sm);
+    }
+  }
+}

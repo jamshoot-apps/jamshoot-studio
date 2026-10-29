@@ -1,0 +1,14 @@
+@layer ds.components {
+  .badge {
+    display: inline-block;
+    padding: 0 var(--ds-space-2xs);
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-pill);
+    color: var(--ds-text-muted);
+    font-family: var(--ds-font-mono);
+    font-size: var(--ds-text-micro);
+    font-weight: var(--ds-weight-regular);
+    line-height: var(--ds-leading-body);
+    white-space: nowrap;
+  }
+}

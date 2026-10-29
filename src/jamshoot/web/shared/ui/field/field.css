@@ -1,0 +1,78 @@
+@layer ds.components {
+  label,
+  legend {
+    display: block;
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-medium);
+  }
+
+  label {
+    margin-bottom: var(--ds-space-2xs);
+  }
+
+  label > span {
+    color: var(--ds-text-muted);
+    font-weight: var(--ds-weight-regular);
+  }
+
+  input:where(:not([type="radio"], [type="checkbox"], [type="file"], [type="range"])),
+  textarea {
+    width: 100%;
+    min-height: var(--studio-control);
+    padding: var(--ds-space-2xs) var(--ds-space-xs);
+    border: var(--studio-rule-strong);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface);
+  }
+
+  textarea {
+    min-height: var(--ds-space-4xl);
+    line-height: var(--ds-leading-body);
+    resize: vertical;
+  }
+
+  :where(input, textarea):disabled {
+    background: var(--ds-surface-sunken);
+    color: var(--ds-text-muted);
+  }
+
+  :where(input, textarea):invalid {
+    border-color: var(--studio-danger);
+  }
+
+  :where(input, textarea, .select) + label {
+    margin-top: var(--ds-space-sm);
+  }
+
+  .hint,
+  .file-name {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    line-height: var(--ds-leading-body);
+  }
+
+  .hint {
+    margin-top: var(--ds-space-2xs);
+  }
+
+  /* A secondary line under a title: a size, a format, a usage count. */
+  .detail {
+    display: block;
+    margin-top: var(--ds-space-3xs);
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    font-weight: var(--ds-weight-regular);
+  }
+
+  .file-name {
+    margin-top: var(--ds-space-2xs);
+    overflow-wrap: anywhere;
+  }
+
+  @media (pointer: coarse) {
+    input,
+    textarea {
+      font-size: var(--ds-text-body);
+    }
+  }
+}

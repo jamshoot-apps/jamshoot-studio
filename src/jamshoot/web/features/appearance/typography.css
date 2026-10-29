@@ -1,0 +1,23 @@
+@layer ds.components {
+  /* Typography: the field switch, font, case and sizes in one compact column. */
+  .typography-controls {
+    display: grid;
+    gap: var(--ds-space-xs);
+  }
+
+  .typography-controls > label {
+    margin: 0;
+  }
+
+  .typography-controls .range-control {
+    margin-block: 0;
+  }
+
+  .typography-controls > .btn {
+    justify-self: start;
+  }
+
+  .typography-details {
+    margin-top: var(--ds-space-sm);
+  }
+}

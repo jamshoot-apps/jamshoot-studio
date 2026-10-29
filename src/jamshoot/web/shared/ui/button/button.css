@@ -1,0 +1,98 @@
+/* Buttons: text, icon + text and icon only (button.js button()). */
+@layer ds.components {
+  button,
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--ds-space-2xs);
+    min-width: 0;
+    height: var(--studio-control);
+    min-height: var(--studio-control);
+    padding: 0 var(--ds-space-xs);
+    border: var(--studio-rule-strong);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface);
+    color: var(--ds-text);
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-medium);
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--ds-motion-quick) var(--ds-ease-out),
+      border-color var(--ds-motion-quick) var(--ds-ease-out),
+      color var(--ds-motion-quick) var(--ds-ease-out);
+  }
+
+  button:hover,
+  .btn:hover {
+    background: var(--studio-hover);
+  }
+
+  button:disabled,
+  .btn:disabled {
+    background: var(--ds-surface);
+    opacity: var(--studio-disabled);
+    cursor: default;
+  }
+
+  .btn-primary {
+    border-color: var(--ds-accent);
+    background: var(--ds-accent);
+    color: var(--ds-on-accent);
+  }
+
+  .btn-primary:hover {
+    border-color: var(--ds-accent-strong);
+    background: var(--ds-accent-strong);
+  }
+
+  .btn-primary:disabled {
+    background: var(--ds-accent);
+  }
+
+  .btn-quiet,
+  .btn-danger {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .btn-quiet:disabled,
+  .btn-danger:disabled {
+    background: transparent;
+  }
+
+  .btn-quiet[aria-expanded="true"] {
+    background: var(--studio-selected);
+    color: var(--ds-accent);
+  }
+
+  .btn-danger {
+    color: var(--studio-danger);
+  }
+
+  .btn-danger:hover {
+    background: var(--studio-danger-surface);
+  }
+
+  .btn-sm {
+    --studio-control: var(--studio-control-sm);
+    --ds-icon-size: var(--ds-icon-sm);
+    padding: 0 var(--ds-space-2xs);
+  }
+
+  .btn-icon {
+    flex: none;
+    width: var(--studio-control);
+    padding: 0;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-2xs);
+    margin-top: var(--ds-space-xs);
+  }
+}

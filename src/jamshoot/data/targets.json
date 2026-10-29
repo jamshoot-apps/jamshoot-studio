@@ -1,0 +1,789 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-15",
+  "source": "https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/",
+  "scope": "All accepted iPhone, iPad and Mac pixel sizes from the reviewed source. Unique platform/size pairs; display groups retain overlap. Does not validate complete submission coverage. iPhone Duo sizes use their own iphone-duo screenshot; their ids keep the appstore.iphone prefix.",
+  "displayGroups": [
+    {
+      "id": "iphone-duo-outer",
+      "platform": "iphone-duo",
+      "label": "Duo outer display",
+      "requiredFrom": "2027-04",
+      "condition": "Apps using iOS 27.1 SDK or later."
+    },
+    {
+      "id": "iphone-duo-inner",
+      "platform": "iphone-duo",
+      "label": "Duo inner display",
+      "requiredFrom": "2027-04",
+      "condition": "Apps using iOS 27.1 SDK or later."
+    },
+    {
+      "id": "iphone-island-large",
+      "platform": "iphone",
+      "label": "Dynamic Island · large"
+    },
+    {
+      "id": "iphone-face-large",
+      "platform": "iphone",
+      "label": "Face ID · large",
+      "requirement": "Required when Dynamic Island large screenshots are absent."
+    },
+    {
+      "id": "iphone-island-medium",
+      "platform": "iphone",
+      "label": "Dynamic Island · medium",
+      "required": true
+    },
+    {
+      "id": "iphone-face-medium",
+      "platform": "iphone",
+      "label": "Face ID · medium"
+    },
+    {
+      "id": "iphone-home-large",
+      "platform": "iphone",
+      "label": "Home button · large"
+    },
+    {
+      "id": "iphone-home-medium",
+      "platform": "iphone",
+      "label": "Home button · medium"
+    },
+    {
+      "id": "iphone-home-4",
+      "platform": "iphone",
+      "label": "Home button · 4\""
+    },
+    {
+      "id": "iphone-home-35",
+      "platform": "iphone",
+      "label": "Home button · 3.5\""
+    },
+    {
+      "id": "ipad-13",
+      "platform": "ipad",
+      "label": "13\" display",
+      "required": true
+    },
+    {
+      "id": "ipad-129",
+      "platform": "ipad",
+      "label": "12.9\" display"
+    },
+    {
+      "id": "ipad-11",
+      "platform": "ipad",
+      "label": "11\" display"
+    },
+    {
+      "id": "ipad-105",
+      "platform": "ipad",
+      "label": "10.5\" display"
+    },
+    {
+      "id": "ipad-97",
+      "platform": "ipad",
+      "label": "9.7\" display"
+    },
+    {
+      "id": "mac",
+      "platform": "mac",
+      "label": "Mac"
+    }
+  ],
+  "targets": [
+    {
+      "id": "appstore.mac.1280x800",
+      "platform": "mac",
+      "width": 1280,
+      "height": 800,
+      "orientation": "landscape",
+      "displayGroups": [
+        "mac"
+      ],
+      "hardware": "plain"
+    },
+    {
+      "id": "appstore.mac.1440x900",
+      "platform": "mac",
+      "width": 1440,
+      "height": 900,
+      "orientation": "landscape",
+      "displayGroups": [
+        "mac"
+      ],
+      "hardware": "plain"
+    },
+    {
+      "id": "appstore.mac.2560x1600",
+      "platform": "mac",
+      "width": 2560,
+      "height": 1600,
+      "orientation": "landscape",
+      "displayGroups": [
+        "mac"
+      ],
+      "hardware": "plain"
+    },
+    {
+      "id": "appstore.mac.2880x1800",
+      "platform": "mac",
+      "width": 2880,
+      "height": 1800,
+      "orientation": "landscape",
+      "displayGroups": [
+        "mac"
+      ],
+      "hardware": "plain"
+    },
+    {
+      "id": "appstore.iphone.1398x2034",
+      "platform": "iphone-duo",
+      "width": 1398,
+      "height": 2034,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-duo-outer"
+      ],
+      "hardware": "duo-outer"
+    },
+    {
+      "id": "appstore.iphone.2034x1398",
+      "platform": "iphone-duo",
+      "width": 2034,
+      "height": 1398,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-duo-outer"
+      ],
+      "hardware": "duo-outer"
+    },
+    {
+      "id": "appstore.iphone.2007x2853",
+      "platform": "iphone-duo",
+      "width": 2007,
+      "height": 2853,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-duo-inner"
+      ],
+      "hardware": "duo-inner"
+    },
+    {
+      "id": "appstore.iphone.2853x2007",
+      "platform": "iphone-duo",
+      "width": 2853,
+      "height": 2007,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-duo-inner"
+      ],
+      "hardware": "duo-inner"
+    },
+    {
+      "id": "appstore.iphone.1260x2736",
+      "platform": "iphone",
+      "width": 1260,
+      "height": 2736,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.2736x1260",
+      "platform": "iphone",
+      "width": 2736,
+      "height": 1260,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.1290x2796",
+      "platform": "iphone",
+      "width": 1290,
+      "height": 2796,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.2796x1290",
+      "platform": "iphone",
+      "width": 2796,
+      "height": 1290,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.1320x2868",
+      "platform": "iphone",
+      "width": 1320,
+      "height": 2868,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.2868x1320",
+      "platform": "iphone",
+      "width": 2868,
+      "height": 1320,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-island-large"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.1284x2778",
+      "platform": "iphone",
+      "width": 1284,
+      "height": 2778,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-face-large"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.2778x1284",
+      "platform": "iphone",
+      "width": 2778,
+      "height": 1284,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-face-large"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.1242x2688",
+      "platform": "iphone",
+      "width": 1242,
+      "height": 2688,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-face-large"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.2688x1242",
+      "platform": "iphone",
+      "width": 2688,
+      "height": 1242,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-face-large"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.1179x2556",
+      "platform": "iphone",
+      "width": 1179,
+      "height": 2556,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-island-medium"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.2556x1179",
+      "platform": "iphone",
+      "width": 2556,
+      "height": 1179,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-island-medium"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.1206x2622",
+      "platform": "iphone",
+      "width": 1206,
+      "height": 2622,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-island-medium"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.2622x1206",
+      "platform": "iphone",
+      "width": 2622,
+      "height": 1206,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-island-medium"
+      ],
+      "hardware": "island"
+    },
+    {
+      "id": "appstore.iphone.1170x2532",
+      "platform": "iphone",
+      "width": 1170,
+      "height": 2532,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.2532x1170",
+      "platform": "iphone",
+      "width": 2532,
+      "height": 1170,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.1125x2436",
+      "platform": "iphone",
+      "width": 1125,
+      "height": 2436,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.2436x1125",
+      "platform": "iphone",
+      "width": 2436,
+      "height": 1125,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.1080x2340",
+      "platform": "iphone",
+      "width": 1080,
+      "height": 2340,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.2340x1080",
+      "platform": "iphone",
+      "width": 2340,
+      "height": 1080,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-face-medium"
+      ],
+      "hardware": "notch"
+    },
+    {
+      "id": "appstore.iphone.1242x2208",
+      "platform": "iphone",
+      "width": 1242,
+      "height": 2208,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-large"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.2208x1242",
+      "platform": "iphone",
+      "width": 2208,
+      "height": 1242,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-large"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.750x1334",
+      "platform": "iphone",
+      "width": 750,
+      "height": 1334,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-medium"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.1334x750",
+      "platform": "iphone",
+      "width": 1334,
+      "height": 750,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-medium"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.640x1136",
+      "platform": "iphone",
+      "width": 640,
+      "height": 1136,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-4"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.1136x640",
+      "platform": "iphone",
+      "width": 1136,
+      "height": 640,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-4"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.640x960",
+      "platform": "iphone",
+      "width": 640,
+      "height": 960,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-35"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.960x640",
+      "platform": "iphone",
+      "width": 960,
+      "height": 640,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-35"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.iphone.640x1096",
+      "platform": "iphone",
+      "width": 640,
+      "height": 1096,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-4"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.iphone.1136x600",
+      "platform": "iphone",
+      "width": 1136,
+      "height": 600,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-4"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.iphone.640x920",
+      "platform": "iphone",
+      "width": 640,
+      "height": 920,
+      "orientation": "portrait",
+      "displayGroups": [
+        "iphone-home-35"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.iphone.960x600",
+      "platform": "iphone",
+      "width": 960,
+      "height": 600,
+      "orientation": "landscape",
+      "displayGroups": [
+        "iphone-home-35"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.ipad.2064x2752",
+      "platform": "ipad",
+      "width": 2064,
+      "height": 2752,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-13"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2752x2064",
+      "platform": "ipad",
+      "width": 2752,
+      "height": 2064,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-13"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2048x2732",
+      "platform": "ipad",
+      "width": 2048,
+      "height": 2732,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-13",
+        "ipad-129"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2732x2048",
+      "platform": "ipad",
+      "width": 2732,
+      "height": 2048,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-13",
+        "ipad-129"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.1488x2266",
+      "platform": "ipad",
+      "width": 1488,
+      "height": 2266,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2266x1488",
+      "platform": "ipad",
+      "width": 2266,
+      "height": 1488,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.1668x2420",
+      "platform": "ipad",
+      "width": 1668,
+      "height": 2420,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2420x1668",
+      "platform": "ipad",
+      "width": 2420,
+      "height": 1668,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.1668x2388",
+      "platform": "ipad",
+      "width": 1668,
+      "height": 2388,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2388x1668",
+      "platform": "ipad",
+      "width": 2388,
+      "height": 1668,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.1640x2360",
+      "platform": "ipad",
+      "width": 1640,
+      "height": 2360,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.2360x1640",
+      "platform": "ipad",
+      "width": 2360,
+      "height": 1640,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-11"
+      ],
+      "hardware": "tablet"
+    },
+    {
+      "id": "appstore.ipad.1668x2224",
+      "platform": "ipad",
+      "width": 1668,
+      "height": 2224,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-105"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.2224x1668",
+      "platform": "ipad",
+      "width": 2224,
+      "height": 1668,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-105"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.1536x2048",
+      "platform": "ipad",
+      "width": 1536,
+      "height": 2048,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.2048x1536",
+      "platform": "ipad",
+      "width": 2048,
+      "height": 1536,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.768x1024",
+      "platform": "ipad",
+      "width": 768,
+      "height": 1024,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.1024x768",
+      "platform": "ipad",
+      "width": 1024,
+      "height": 768,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home"
+    },
+    {
+      "id": "appstore.ipad.1536x2008",
+      "platform": "ipad",
+      "width": 1536,
+      "height": 2008,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.ipad.2048x1496",
+      "platform": "ipad",
+      "width": 2048,
+      "height": 1496,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.ipad.768x1004",
+      "platform": "ipad",
+      "width": 768,
+      "height": 1004,
+      "orientation": "portrait",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    },
+    {
+      "id": "appstore.ipad.1024x748",
+      "platform": "ipad",
+      "width": 1024,
+      "height": 748,
+      "orientation": "landscape",
+      "displayGroups": [
+        "ipad-97"
+      ],
+      "hardware": "home",
+      "statusBar": "excluded"
+    }
+  ]
+}

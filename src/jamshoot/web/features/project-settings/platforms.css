@@ -1,0 +1,75 @@
+/* Platforms and their output sizes (platform-list.js). */
+@layer ds.components {
+  .target-options {
+    display: grid;
+    gap: var(--ds-space-xs);
+  }
+
+  .platform-card {
+    display: grid;
+    gap: var(--ds-space-2xs);
+    padding: var(--ds-space-xs) var(--ds-space-sm);
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-md);
+  }
+
+  .platform-name {
+    margin: 0;
+  }
+
+  .platform-sizes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .platform-size {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    padding-block: var(--ds-space-3xs);
+  }
+
+  .platform-size + .platform-size {
+    border-top: var(--studio-rule);
+  }
+
+  .platform-size-name {
+    flex: 1;
+    min-width: 0;
+    font-variant-numeric: tabular-nums;
+    font-weight: var(--ds-weight-medium);
+  }
+
+  .platform-card > :is(.btn, .select) {
+    justify-self: start;
+  }
+
+  .platform-card > .btn-quiet {
+    color: var(--ds-accent);
+  }
+
+  /* Slides still missing the platform's screenshot, with a way to add them all at once. */
+  .platform-missing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ds-space-2xs) var(--ds-space-xs);
+    padding: var(--ds-space-2xs) var(--ds-space-xs);
+    border-radius: var(--ds-radius-sm);
+    background: var(--ds-surface-sunken);
+  }
+
+  .platform-missing > p {
+    flex: 1;
+    min-width: var(--ds-space-5xl);
+    margin: 0;
+    color: var(--studio-warning);
+  }
+
+  .custom-size-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ds-space-xs);
+  }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="jamshoot-token" content="__SESSION_TOKEN__">
+  <title>Projects · JamShoot Studio</title>
+  <link rel="icon" href="../../assets/jamshoot-logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../shared/styles/tokens.css">
+  <link rel="stylesheet" href="../../shared/styles/theme.css">
+  <link rel="stylesheet" href="../../shared/styles/base.css">
+  <link rel="stylesheet" href="../../shared/ui/button/button.css">
+  <link rel="stylesheet" href="../../shared/ui/field/field.css">
+  <link rel="stylesheet" href="../../shared/ui/choice-group/choice-group.css">
+  <link rel="stylesheet" href="../../shared/ui/topbar/topbar.css">
+  <link rel="stylesheet" href="../../shared/ui/dialogs/dialogs.css">
+  <link rel="stylesheet" href="../../shared/ui/icon/icon.css">
+  <link rel="stylesheet" href="./home.css">
+  <script src="./home.js" type="module"></script>
+</head>
+<body>
+  <header class="topbar home-topbar">
+    <div class="brand"><img class="brand-logo" src="../../assets/jamshoot-logo.svg" alt="" width="32" height="32"><span class="brand-name"><strong>JamShoot</strong><span class="brand-sub">Studio</span></span></div>
+    <div class="home-actions">
+      <button id="open-settings" class="btn btn-quiet btn-icon" aria-haspopup="dialog" aria-controls="settings-dialog" aria-label="Settings" title="Settings"><span class="icon icon-settings" aria-hidden="true"></span></button>
+      <button id="open-import" class="btn btn-quiet" title="Import a project .zip exported from Studio"><span class="icon icon-upload" aria-hidden="true"></span>Import .zip…</button>
+      <input id="import-file" type="file" accept=".zip,application/zip" hidden>
+      <button id="open-create" class="btn btn-primary" aria-haspopup="dialog" aria-controls="create-dialog"><span class="icon icon-add" aria-hidden="true"></span>New project</button>
+    </div>
+  </header>
+  <main class="home">
+    <div class="home-heading">
+      <div><h1>Projects</h1><p id="home-path" class="hint"></p></div>
+      <label class="sr-only" for="project-search">Search projects</label>
+      <input id="project-search" type="search" placeholder="Search projects" autocomplete="off" hidden>
+    </div>
+    <p id="home-error" class="home-error" role="alert" hidden></p>
+    <button id="retry-projects" class="btn" hidden>Try loading projects again</button>
+    <p id="home-loading" class="hint" role="status">Loading projects…</p>
+    <ul id="projects" class="project-grid" aria-label="Projects" aria-busy="true"></ul>
+    <div id="empty-projects" class="empty-projects" hidden>
+      <span class="icon icon-albums" aria-hidden="true"></span>
+      <h2>No projects yet</h2>
+      <p class="hint">Create a project for iPhone, iPad or Mac, or drop a project .zip here.</p>
+      <button id="empty-create" class="btn btn-primary"><span class="icon icon-add" aria-hidden="true"></span>New project</button>
+    </div>
+    <div id="no-results" class="empty-projects" role="status" hidden><h2>No matching projects</h2><p class="hint">Try another name or clear your search.</p><button id="clear-search" class="btn">Clear search</button></div>
+  </main>
+  <div id="drop-zone" class="drop-zone" hidden>
+    <div class="drop-zone-target"><span class="icon icon-upload" aria-hidden="true"></span><strong>Drop a project .zip to import it</strong></div>
+  </div>
+
+  <dialog id="create-dialog" class="dialog home-dialog" aria-labelledby="create-heading">
+    <form id="create-form" method="dialog">
+      <div class="dialog-heading"><h2 id="create-heading">New project</h2><button type="button" class="btn btn-quiet btn-icon" data-close aria-label="Close" title="Close"><span class="icon icon-close" aria-hidden="true"></span></button></div>
+      <div class="dialog-body">
+        <label for="create-name">Project name</label>
+        <input id="create-name" name="name" maxlength="200" required autocomplete="off" placeholder="My App">
+        <fieldset class="choice-group platform-choice"><legend>First platform</legend><div class="choice-options">
+          <label class="choice choice-card"><input type="radio" name="platform" value="iphone" checked><span><strong>iPhone</strong><small class="detail">6.1" · 1179 × 2556</small></span></label>
+          <label class="choice choice-card"><input type="radio" name="platform" value="ipad"><span><strong>iPad</strong><small class="detail">13" · 2064 × 2752</small></span></label>
+          <label class="choice choice-card"><input type="radio" name="platform" value="mac"><span><strong>Mac</strong><small class="detail">2880 × 1800</small></span></label>
+        </div></fieldset>
+        <p class="hint">More sizes, platforms and languages can be added in Project settings.</p>
+        <p id="create-error" class="form-error" role="alert" hidden></p>
+      </div>
+      <div class="dialog-footer"><button type="button" class="btn" data-close>Cancel</button><button id="create-submit" class="btn btn-primary" type="submit">Create project</button></div>
+    </form>
+  </dialog>
+  <dialog id="settings-dialog" class="dialog home-dialog" aria-labelledby="settings-heading">
+    <form id="settings-form" method="dialog">
+      <div class="dialog-heading"><h2 id="settings-heading">Settings</h2><button type="button" class="btn btn-quiet btn-icon" data-close aria-label="Close" title="Close"><span class="icon icon-close" aria-hidden="true"></span></button></div>
+      <div class="dialog-body">
+        <label for="settings-home">Studio folder</label>
+        <input id="settings-home" name="home" required autocomplete="off" spellcheck="false" placeholder="~/JamShoot">
+        <p class="hint">Projects are kept in its projects folder, removed ones in trash. A missing folder is created.</p>
+        <p id="settings-source" class="hint" hidden></p>
+        <p id="settings-file" class="detail"></p>
+        <p id="settings-error" class="form-error" role="alert" hidden></p>
+      </div>
+      <div class="dialog-footer"><button type="button" class="btn" data-close>Cancel</button><button class="btn btn-primary" type="submit">Save</button></div>
+    </form>
+  </dialog>
+
+</body>
+</html>

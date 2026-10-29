@@ -1,0 +1,82 @@
+name: Create tag and release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Prepared stable package version, without v (for example 0.1.0)
+        required: true
+        type: string
+      draft:
+        description: Create a draft GitHub Release
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      RELEASE_DRAFT: ${{ inputs.draft }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.14"
+      - name: Validate release metadata
+        run: >-
+          python .github/scripts/prepare_release.py
+          --version "$RELEASE_VERSION"
+          --output "$RUNNER_TEMP/release-notes.md"
+      - name: Refuse to overwrite an existing tag
+        run: |
+          if git show-ref --verify --quiet "refs/tags/v$RELEASE_VERSION"; then
+            echo "Tag v$RELEASE_VERSION already exists; refusing to overwrite it." >&2
+            exit 1
+          fi
+      - run: python -m pip install '.[dev,web]'
+      - run: python -m ruff check .
+      - run: python -m ruff format --check .
+      - run: python -m black --check .
+      - run: python -m mypy
+      - run: python -m pyright
+      - run: python -m pylint src tests
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          # No dependency cache in a job that can push tags and create releases.
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm run check
+      # Text renders with an installed sans-serif font; Linux runners get DejaVu Sans.
+      - name: Install the default font
+        if: runner.os == 'Linux'
+        run: sudo apt-get install --yes --no-install-recommends fonts-dejavu-core
+      - run: python -m unittest discover -s tests -v
+      - run: python -m build
+      - run: python tests/check_distribution.py dist
+      - name: Tag the checked commit and create its GitHub Release
+        run: |
+          tag="v$RELEASE_VERSION"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git tag --annotate "$tag" "$GITHUB_SHA" --message "$tag"
+          git push origin "refs/tags/$tag"
+          options=()
+          if [ "$RELEASE_DRAFT" = 'true' ]; then options+=(--draft); fi
+          gh release create "$tag" --verify-tag --title "$tag" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" "${options[@]}" dist/*

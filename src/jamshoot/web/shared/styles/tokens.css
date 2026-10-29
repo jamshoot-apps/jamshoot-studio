@@ -1,0 +1,146 @@
+/*
+ * Primitives: the fixed spacing, type, radius and motion scales Studio is built on.
+ * Color lives in theme.css.
+ * Studio's own primitives carry the --studio- prefix.
+ */
+@layer ds.reset, ds.primitives, ds.theme, ds.base, ds.components, studio, state;
+
+@layer ds.primitives {
+  :root {
+    --ds-space-3xs: 0.25rem;
+    --ds-space-2xs: 0.5rem;
+    --ds-space-xs: 0.75rem;
+    --ds-space-sm: 1rem;
+    --ds-space-md: 1.25rem;
+    --ds-space-lg: 1.5rem;
+    --ds-space-xl: 2rem;
+    --ds-space-2xl: 2.5rem;
+    --ds-space-3xl: 3.5rem;
+    --ds-space-4xl: 5rem;
+    --ds-space-5xl: 7rem;
+
+    --ds-radius-sm: 10px;
+    --ds-radius-md: 16px;
+    --ds-radius-lg: 22px;
+    --ds-radius-pill: 999px;
+
+    --ds-font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --ds-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+    --ds-text-display: clamp(2.1rem, 1.5rem + 2.6vw, 3.5rem);
+    --ds-text-title: clamp(1.55rem, 1.3rem + 1.1vw, 2.25rem);
+    --ds-text-subtitle: clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem);
+    --ds-text-body: 1rem;
+    --ds-text-small: 0.9375rem;
+    --ds-text-caption: 0.8125rem;
+    --ds-text-micro: 0.6875rem;
+    --ds-text-code: 0.9em;
+
+    --ds-weight-regular: 400;
+    --ds-weight-medium: 500;
+    --ds-weight-semibold: 600;
+    --ds-weight-bold: 700;
+
+    --ds-leading-tight: 1.1;
+    --ds-leading-snug: 1.35;
+    --ds-leading-body: 1.6;
+    --ds-tracking-tight: -0.02em;
+    --ds-tracking-wide: 0.16em;
+
+    --ds-underline-offset: 0.18em;
+    --ds-align-nudge: 0.3em;
+
+    --ds-motion-quick: 160ms;
+    --ds-motion-settle: 320ms;
+    --ds-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+    --ds-content-max: 1120px;
+    --ds-content-narrow: 720px;
+    --ds-gutter: var(--ds-space-md);
+    --ds-header-height: 3.75rem;
+
+    --ds-measure-3xs: 9rem;
+    --ds-measure-2xs: 12rem;
+    --ds-measure-xs: 16rem;
+    --ds-measure-sm: 18rem;
+    --ds-measure-md: 20rem;
+    --ds-measure-lg: 34rem;
+    --ds-measure-xl: 36rem;
+    --ds-measure-2xl: 40rem;
+
+    --ds-icon-sm: 1rem;
+    --ds-icon-md: 1.125rem;
+    --ds-icon-lg: 1.5rem;
+    --ds-icon-size: var(--ds-icon-md);
+    --ds-icon-tile: 2.75rem;
+
+    --ds-layer-chrome: 20;
+    --ds-layer-top: 100;
+
+    --ds-hairline: 1px;
+    --ds-focus-ring: 2px;
+    --ds-focus-offset: 3px;
+
+    --ds-tap-target: 44px;
+
+    /*
+     * Studio is an editor used with a mouse as often as with a finger, so controls
+     * are a tap target on touch screens and denser under a fine pointer. Both stay
+     * above the 24px WCAG 2.5.8 floor.
+     */
+    --studio-control: var(--ds-tap-target);
+    --studio-control-sm: 2.25rem;
+
+    /* Elevation is shading, so it is translucent black on every palette. */
+    --studio-shadow-raised:
+      0 var(--ds-hairline) var(--ds-space-3xs) rgb(0 0 0 / 0.08),
+      0 var(--ds-space-2xs) var(--ds-space-xl) rgb(0 0 0 / 0.1);
+    --studio-shadow-overlay:
+      0 var(--ds-space-xs) var(--ds-space-xl) rgb(0 0 0 / 0.16),
+      0 var(--ds-hairline) var(--ds-space-2xs) rgb(0 0 0 / 0.08);
+    --studio-backdrop: rgb(0 0 0 / 0.4);
+    --studio-edge: inset 0 0 0 var(--ds-hairline) rgb(0 0 0 / 0.14);
+    /* Handles drawn over arbitrary colors (picker cursors, gradient stops) stay visible on
+     * light and dark ones: a white ring inside a thin dark edge. */
+    --studio-handle-ring: calc(2 * var(--ds-hairline)) solid rgb(255 255 255);
+    --studio-handle-edge: 0 0 0 var(--ds-hairline) rgb(0 0 0 / 0.5);
+    --studio-spinner-ring: var(--ds-focus-ring) solid var(--ds-border-strong);
+
+    /* Composites the components repeat: dividers, the focus outline, the radius of a
+     * control set inside a padded track, and the dimming of an unavailable control. */
+    --studio-rule: var(--ds-hairline) solid var(--ds-border);
+    --studio-rule-strong: var(--ds-hairline) solid var(--ds-border-strong);
+    --studio-focus: var(--ds-focus-ring) solid var(--ds-accent);
+    --studio-radius-inner: calc(var(--ds-radius-sm) - var(--ds-space-3xs));
+    --studio-disabled: 0.45;
+
+    /* The color picker draws the value space it selects from; these are its data. */
+    --studio-hue-track: linear-gradient(
+      to right,
+      rgb(255 0 0),
+      rgb(255 255 0),
+      rgb(0 255 0),
+      rgb(0 255 255),
+      rgb(0 0 255),
+      rgb(255 0 255),
+      rgb(255 0 0)
+    );
+    --studio-tone-plane:
+      linear-gradient(to top, rgb(0 0 0), transparent),
+      linear-gradient(to right, rgb(255 255 255), transparent);
+  }
+
+  @media (min-width: 52rem) {
+    :root {
+      --ds-gutter: var(--ds-space-xl);
+      --ds-header-height: 4.25rem;
+    }
+  }
+
+  @media (pointer: fine) {
+    :root {
+      --studio-control: 2.25rem;
+      --studio-control-sm: 1.75rem;
+    }
+  }
+}

@@ -1,0 +1,201 @@
+/*
+ * Editor template, mobile first: a canvas with slide and settings drawers; from
+ * 64rem the drawers dock beside the canvas as three independent scroll regions.
+ */
+@layer studio {
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  /* App bar. */
+  .back-link {
+    margin-left: calc(-1 * var(--ds-space-2xs));
+    padding-inline: var(--ds-space-2xs);
+  }
+
+  /* Before the back link the editor keeps only the mark; the link already names Projects. */
+  .brand:has(+ .back-link:not([hidden])) :is(strong, .brand-sub) {
+    display: none;
+  }
+
+  .topbar h1 {
+    flex: 1;
+    min-width: 0;
+    padding-left: var(--ds-space-xs);
+    overflow: hidden;
+    border-left: var(--studio-rule);
+    font-size: var(--ds-text-caption);
+    font-weight: var(--ds-weight-semibold);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+  }
+
+  .topbar .btn-label,
+  .back-label,
+  .save-state {
+    display: none;
+  }
+
+  .topbar .btn:not(.btn-icon) {
+    width: var(--studio-control);
+    padding: 0;
+  }
+
+  .save-state {
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    margin-right: var(--ds-space-3xs);
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    white-space: nowrap;
+  }
+
+  .save-state::before {
+    content: "";
+    width: var(--ds-space-2xs);
+    height: var(--ds-space-2xs);
+    border-radius: var(--ds-radius-pill);
+    background: var(--ds-accent);
+  }
+
+  .save-state.is-dirty::before {
+    background: var(--studio-warning);
+  }
+
+  /* Editor and drawers. */
+  .editor {
+    display: flex;
+    height: calc(100dvh - var(--ds-header-height));
+  }
+
+  .panel {
+    position: fixed;
+    inset-block: 0;
+    z-index: var(--ds-layer-top);
+    width: min(var(--ds-measure-md), 92vw);
+    min-width: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--ds-surface);
+    box-shadow: var(--studio-shadow-overlay);
+    scrollbar-width: thin;
+  }
+
+  .slides-panel {
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: var(--studio-rule);
+  }
+
+  .inspector-panel {
+    right: 0;
+    border-left: var(--studio-rule);
+  }
+
+  .panel-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--ds-layer-chrome);
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+    background: var(--studio-backdrop);
+    cursor: default;
+  }
+
+  .panel-backdrop:hover {
+    background: var(--studio-backdrop);
+  }
+
+  .panel-heading {
+    position: sticky;
+    top: 0;
+    z-index: var(--ds-layer-chrome);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ds-space-2xs);
+    min-height: var(--ds-header-height);
+    padding: var(--ds-space-2xs) var(--ds-space-2xs) var(--ds-space-2xs) var(--ds-space-sm);
+    border-bottom: var(--studio-rule);
+    background: var(--ds-surface);
+  }
+
+  .panel-heading > div {
+    min-width: 0;
+  }
+
+  .panel-heading h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+  }
+
+  .panel-subtitle {
+    overflow: hidden;
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .panel-subtitle strong {
+    color: var(--ds-text);
+    font-weight: var(--ds-weight-medium);
+  }
+
+  @media (min-width: 52rem) {
+    .topbar .btn-label,
+    .back-label {
+      display: inline;
+    }
+
+    .topbar .btn:not(.btn-icon) {
+      width: auto;
+      padding: 0 var(--ds-space-xs);
+    }
+  }
+
+  /* From 64rem both panels dock beside the canvas; each can still be hidden. */
+  @media (min-width: 64rem) {
+    .save-state {
+      display: inline-flex;
+    }
+
+    .editor {
+      display: grid;
+      grid-template-columns: var(--ds-measure-2xs) minmax(0, 1fr) var(--ds-measure-md);
+    }
+
+    .editor.without-slides-panel {
+      grid-template-columns: minmax(0, 1fr) var(--ds-measure-md);
+    }
+
+    .editor.without-inspector-panel {
+      grid-template-columns: var(--ds-measure-2xs) minmax(0, 1fr);
+    }
+
+    .editor.without-slides-panel.without-inspector-panel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel {
+      position: relative;
+      inset: auto;
+      z-index: auto;
+      width: auto;
+      padding-bottom: 0;
+      box-shadow: none;
+    }
+  }
+}

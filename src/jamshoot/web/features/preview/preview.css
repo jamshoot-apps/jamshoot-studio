@@ -1,0 +1,359 @@
+/* Editor canvas: the toolbar, preview and status line, sized by the canvas container. */
+@layer studio {
+  /* The toolbar and margins follow the canvas width, not the window. */
+  .workspace {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    background: var(--ds-bg);
+    container: workspace / inline-size;
+  }
+
+  .canvas-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    min-height: var(--ds-header-height);
+    padding: var(--ds-space-2xs) var(--ds-space-xs);
+    border-bottom: var(--studio-rule);
+    background: var(--ds-surface);
+  }
+
+  .panel-toggle {
+    flex: none;
+  }
+
+  .panel-toggle .btn-label,
+  .compact-field label {
+    display: none;
+  }
+
+  .panel-toggle:not(.btn-icon) {
+    width: var(--studio-control);
+    padding: 0;
+  }
+
+  .history-actions {
+    display: flex;
+    flex: none;
+    gap: var(--ds-space-3xs);
+  }
+
+  .canvas-toolbar .history-actions {
+    margin-left: auto;
+  }
+
+  .context-fields {
+    display: flex;
+    flex-basis: 100%;
+    justify-content: center;
+    order: 3;
+    gap: var(--ds-space-2xs);
+    min-width: 0;
+  }
+
+  .compact-field {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--ds-space-2xs);
+    min-width: 0;
+  }
+
+  .compact-field label {
+    margin: 0;
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    white-space: nowrap;
+  }
+
+  .compact-field .select {
+    width: 100%;
+    min-width: var(--ds-space-4xl);
+  }
+
+  .compact-field .select-trigger {
+    --studio-control: var(--studio-control-sm);
+  }
+
+  .canvas-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--ds-space-xs);
+    padding: var(--ds-space-xs) var(--ds-space-xs) 0;
+    color: var(--ds-text-muted);
+  }
+
+  /* The previewed slide lacks this size's screenshot; the blank screen stands in for it. */
+  .canvas-notice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--ds-space-2xs) var(--ds-space-xs);
+    margin: var(--ds-space-xs) var(--ds-space-xs) 0;
+    padding: var(--ds-space-2xs) var(--ds-space-xs);
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-surface);
+  }
+
+  .canvas-notice[hidden] {
+    display: none;
+  }
+
+  .canvas-notice > p {
+    flex: 1;
+    margin: 0;
+  }
+
+  .canvas-viewport {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    padding: var(--ds-space-xs);
+    overflow: auto;
+  }
+
+  .preview-updating {
+    position: absolute;
+    top: var(--ds-space-xs);
+    left: 50%;
+    z-index: var(--ds-layer-chrome);
+    width: max-content;
+    max-width: calc(100% - 2 * var(--ds-space-xs));
+    margin: 0;
+    background: var(--ds-surface-raised);
+    box-shadow: var(--studio-shadow-overlay);
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  /* An image dragged over the canvas becomes the previewed slide's screenshot. */
+  .workspace.is-dropping .canvas-viewport {
+    outline: var(--ds-focus-ring) dashed var(--ds-accent);
+    outline-offset: calc(-1 * var(--ds-space-2xs));
+  }
+
+  .artboard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: var(--ds-measure-3xs);
+  }
+
+  .artboard img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: var(--studio-shadow-raised);
+    transition:
+      opacity var(--ds-motion-settle) var(--ds-ease-out),
+      filter var(--ds-motion-settle) var(--ds-ease-out);
+  }
+
+  /* Same-slide edits keep a labeled previous version. A spinner turns in the corner of
+     the canvas, or over a slide card whose thumbnail is on its way, and appears only once
+     the wait becomes noticeable. */
+  .workspace.is-rendering .artboard::after,
+  .slide-thumb.is-loading::after {
+    content: "";
+    position: absolute;
+    top: var(--ds-space-sm);
+    right: var(--ds-space-sm);
+    width: var(--ds-icon-lg);
+    height: var(--ds-icon-lg);
+    border: var(--studio-spinner-ring);
+    border-top-color: var(--ds-accent);
+    border-radius: var(--ds-radius-pill);
+    animation:
+      studio-spin calc(3 * var(--ds-motion-settle)) linear infinite,
+      studio-appear var(--ds-motion-quick) var(--ds-ease-out) var(--ds-motion-settle) both;
+  }
+
+  .slide-thumb.is-loading::after {
+    top: var(--ds-space-2xs);
+    right: var(--ds-space-2xs);
+    width: var(--ds-icon-md);
+    height: var(--ds-icon-md);
+  }
+
+  @keyframes studio-spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes studio-appear {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* Spacing guides: drawn in canvas pixels, their strokes one screen pixel wide. */
+  .guide-overlay {
+    position: absolute;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .guide-overlay * {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .guide-box,
+  .guide-column {
+    fill: none;
+    stroke: var(--studio-guide);
+    stroke-dasharray: 4 3;
+    stroke-opacity: 0.55;
+  }
+
+  .guide-column {
+    stroke-opacity: 0.3;
+  }
+
+  .guide-active {
+    fill: var(--studio-guide);
+    fill-opacity: 0.12;
+    stroke: var(--studio-guide);
+  }
+
+  .guide-measure {
+    stroke: var(--studio-guide);
+    stroke-width: 1.5;
+  }
+
+  .guide-label rect {
+    fill: var(--studio-guide);
+  }
+
+  .guide-label text {
+    fill: rgb(255 255 255);
+    font-weight: var(--ds-weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .artboard img.is-stale {
+    opacity: 0.35;
+    filter: grayscale(0.6);
+  }
+
+  .preview-failure {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: min(var(--ds-measure-lg), 90%);
+    padding: var(--ds-space-xs) var(--ds-space-sm);
+    border: var(--ds-hairline) solid var(--studio-danger-border);
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-surface-raised);
+    color: var(--studio-danger);
+    box-shadow: var(--studio-shadow-overlay);
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+    transform: translate(-50%, -50%);
+  }
+
+  .preview-failure:has(.preview-error[hidden]) {
+    display: none;
+  }
+
+  .preview-failure .btn {
+    margin-top: var(--ds-space-xs);
+  }
+
+  .empty-preview {
+    color: var(--ds-text-muted);
+    text-align: center;
+  }
+
+  .empty-preview > .icon {
+    --ds-icon-size: var(--ds-space-2xl);
+  }
+
+  .canvas-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--ds-space-sm);
+    padding: var(--ds-space-2xs) var(--ds-space-xs);
+    border-top: var(--studio-rule);
+    background: var(--ds-surface);
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+  }
+
+  .status {
+    min-width: 0;
+    overflow: hidden;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .status.error {
+    color: var(--studio-danger);
+  }
+
+  @container workspace (min-width: 34rem) {
+    .canvas-toolbar {
+      flex-wrap: nowrap;
+    }
+
+    .canvas-toolbar .history-actions {
+      margin-left: 0;
+    }
+
+    .context-fields {
+      flex: 1;
+      flex-basis: auto;
+      order: 0;
+      gap: var(--ds-space-xs);
+    }
+
+    .compact-field {
+      flex: 0 1 auto;
+    }
+
+    .compact-field .select {
+      max-width: var(--ds-measure-2xs);
+    }
+  }
+
+  @container workspace (min-width: 52rem) {
+    .panel-toggle .btn-label,
+    .compact-field label {
+      display: inline;
+    }
+
+    .panel-toggle:not(.btn-icon) {
+      width: auto;
+      padding: 0 var(--ds-space-xs);
+    }
+
+    .canvas-heading {
+      padding: var(--ds-space-sm) var(--ds-space-lg) 0;
+    }
+
+    .canvas-viewport {
+      padding: var(--ds-space-md) var(--ds-space-lg);
+    }
+
+    .canvas-bottom {
+      padding-inline: var(--ds-space-lg);
+    }
+  }
+}

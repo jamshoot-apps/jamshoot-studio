@@ -1,0 +1,287 @@
+/* Color compositions: palette cards, the palette editor and the layout template library. */
+@layer ds.components {
+  /* Palette picker: cards that show each palette's fill, pattern and text colors. */
+  .palette-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--ds-space-3xl), 1fr));
+    gap: var(--ds-space-2xs);
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .palette-picker > legend {
+    margin-bottom: var(--ds-space-2xs);
+    padding: 0;
+  }
+
+  .palette-group {
+    grid-column: 1 / -1;
+    margin: var(--ds-space-2xs) 0 0;
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    letter-spacing: var(--ds-tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .palette-card {
+    position: relative;
+    display: grid;
+    gap: var(--ds-space-3xs);
+    min-width: 0;
+    cursor: pointer;
+  }
+
+  .palette-card input {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .palette-swatch {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: var(--ds-space-3xs);
+    aspect-ratio: 4 / 3;
+    padding: var(--ds-space-3xs);
+    border-radius: var(--ds-radius-sm);
+    box-shadow: var(--studio-edge);
+  }
+
+  .palette-swatch > span {
+    width: var(--ds-icon-sm);
+    height: var(--ds-icon-sm);
+    border-radius: var(--ds-radius-pill);
+    box-shadow: var(--studio-edge);
+  }
+
+  .palette-name {
+    overflow: hidden;
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-micro);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .palette-card:hover .palette-swatch {
+    box-shadow: inset 0 0 0 var(--ds-hairline) var(--ds-border-strong);
+  }
+
+  .palette-card input:checked ~ .palette-swatch {
+    outline: var(--studio-focus);
+    outline-offset: var(--ds-focus-offset);
+  }
+
+  .palette-card input:checked ~ .palette-name {
+    color: var(--ds-accent);
+    font-weight: var(--ds-weight-medium);
+  }
+
+  .palette-card input:focus-visible ~ .palette-swatch {
+    outline: var(--studio-focus);
+    outline-offset: calc(2 * var(--ds-focus-offset));
+  }
+
+  .palette-picker:disabled .palette-card {
+    opacity: var(--studio-disabled);
+    cursor: default;
+  }
+
+  .palette-tag {
+    position: absolute;
+    top: var(--ds-space-3xs);
+    right: var(--ds-space-3xs);
+    padding: 0 var(--ds-space-3xs);
+    border-radius: var(--ds-radius-pill);
+    background: var(--ds-surface);
+    color: var(--ds-text);
+    font-size: var(--ds-text-micro);
+    line-height: var(--ds-leading-snug);
+  }
+
+  /* Project → Colors: the chosen palette, previewed as a slide beside its name and actions. */
+  .palette-editor {
+    display: grid;
+    gap: var(--ds-space-sm);
+    margin-top: var(--ds-space-sm);
+    padding: var(--ds-space-sm);
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-surface);
+  }
+
+  .palette-editor-head {
+    display: grid;
+    grid-template-columns: var(--ds-space-4xl) minmax(0, 1fr);
+    gap: var(--ds-space-sm);
+    align-items: start;
+  }
+
+  .palette-editor-meta {
+    display: grid;
+    gap: var(--ds-space-2xs);
+    min-width: 0;
+  }
+
+  .palette-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--ds-space-3xs);
+    aspect-ratio: 9 / 19.5;
+    padding: var(--ds-space-xs) var(--ds-space-2xs);
+    overflow: hidden;
+    border-radius: var(--ds-radius-md);
+    box-shadow: var(--studio-edge);
+    text-align: center;
+  }
+
+  .palette-preview strong {
+    font-size: var(--ds-text-caption);
+    line-height: var(--ds-leading-tight);
+  }
+
+  .palette-preview span {
+    font-size: var(--ds-text-micro);
+  }
+
+  .palette-preview i {
+    align-self: center;
+    width: var(--ds-icon-sm);
+    height: var(--ds-icon-sm);
+    border-radius: var(--ds-radius-pill);
+  }
+
+  .project-default-colors {
+    margin-top: var(--ds-space-md);
+  }
+
+  .customize-colors summary .badge {
+    margin-left: var(--ds-space-3xs);
+  }
+
+  /* What the colors follow; with local changes it turns into a call to keep or share them. */
+  .palette-changes {
+    display: grid;
+    gap: var(--ds-space-2xs);
+    margin-top: var(--ds-space-xs);
+  }
+
+  .palette-changes.has-changes {
+    padding: var(--ds-space-xs);
+    border: var(--ds-hairline) solid var(--ds-accent);
+    border-radius: var(--ds-radius-md);
+    background: var(--studio-selected);
+  }
+
+  .palette-changes.has-changes > .hint {
+    color: var(--ds-text);
+  }
+
+  .palette-changes .button-row:not(:has(.btn:not([hidden]))) {
+    display: none;
+  }
+
+  .color-list,
+  .palette-editor-colors {
+    display: grid;
+    gap: var(--ds-space-3xs);
+    margin-top: var(--ds-space-xs);
+  }
+
+  .palette-default {
+    margin-bottom: var(--ds-space-sm);
+    padding-bottom: var(--ds-space-sm);
+    border-bottom: var(--studio-rule);
+  }
+
+  .palettes-heading {
+    margin-bottom: var(--ds-space-2xs);
+  }
+
+  .palette-list {
+    display: grid;
+    gap: var(--ds-space-2xs);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .palette-row {
+    border: var(--studio-rule);
+    border-radius: var(--ds-radius-md);
+    background: var(--ds-surface);
+  }
+
+  .palette-row:has(.palette-editor) {
+    border-color: var(--ds-accent);
+    box-shadow: inset 0 0 0 var(--ds-hairline) var(--ds-accent);
+  }
+
+  .palette-row-main {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-xs);
+    padding: var(--ds-space-2xs) var(--ds-space-2xs) var(--ds-space-2xs) var(--ds-space-xs);
+  }
+
+  .palette-row-main > span:nth-child(2) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .palette-row-main strong {
+    display: block;
+    overflow: hidden;
+    font-weight: var(--ds-weight-medium);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .palette-row-actions {
+    display: flex;
+    gap: var(--ds-space-3xs);
+  }
+
+  .palette-strip {
+    display: flex;
+    flex: none;
+    width: var(--ds-space-2xl);
+    height: var(--ds-icon-lg);
+    overflow: hidden;
+    border-radius: var(--ds-radius-pill);
+    box-shadow: var(--studio-edge);
+  }
+
+  .palette-strip > span {
+    flex: 1;
+  }
+
+  /* Layout templates share the library rows; a mark stands in for the color strip. */
+  .template-mark {
+    flex: none;
+  }
+
+  .layout-spacing {
+    margin-top: var(--ds-space-xs);
+  }
+
+  .palette-editor {
+    padding: var(--ds-space-xs);
+    border-top: var(--studio-rule);
+  }
+
+  .palette-empty {
+    padding: var(--ds-space-sm);
+    border: var(--ds-hairline) dashed var(--ds-border-strong);
+    border-radius: var(--ds-radius-md);
+    text-align: center;
+  }
+
+  @media (min-width: 34rem) {
+    .palette-strip {
+      width: var(--ds-space-4xl);
+    }
+  }
+}

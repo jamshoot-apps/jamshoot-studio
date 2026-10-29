@@ -1,0 +1,81 @@
+/* Ionicons 8.1.0: original SVGs and MIT notice in /vendor/ionicons/. */
+@layer ds.base {
+  /* An icon is the size of --ds-icon-size where it lands and the color of its text. */
+  .icon {
+    display: inline-block;
+    flex: none;
+    width: var(--ds-icon-size);
+    height: var(--ds-icon-size);
+    vertical-align: calc(-1 * var(--ds-align-nudge) / 1.5);
+    background-color: currentColor;
+    pointer-events: none;
+    -webkit-mask: var(--icon-svg) center / contain no-repeat;
+    mask: var(--icon-svg) center / contain no-repeat;
+  }
+  .icon-settings {
+    --icon-svg: url("/vendor/ionicons/settings-outline.svg");
+  }
+  .icon-refresh {
+    --icon-svg: url("/vendor/ionicons/refresh-outline.svg");
+  }
+  .icon-save {
+    --icon-svg: url("/vendor/ionicons/save-outline.svg");
+  }
+  .icon-download {
+    --icon-svg: url("/vendor/ionicons/download-outline.svg");
+  }
+  .icon-upload {
+    --icon-svg: url("/vendor/ionicons/cloud-upload-outline.svg");
+  }
+  .icon-close {
+    --icon-svg: url("/vendor/ionicons/close-outline.svg");
+  }
+  .icon-copy {
+    --icon-svg: url("/vendor/ionicons/copy-outline.svg");
+  }
+  .icon-arrow-up {
+    --icon-svg: url("/vendor/ionicons/arrow-up-outline.svg");
+  }
+  .icon-arrow-down {
+    --icon-svg: url("/vendor/ionicons/arrow-down-outline.svg");
+  }
+  .icon-trash {
+    --icon-svg: url("/vendor/ionicons/trash-outline.svg");
+  }
+  .icon-albums {
+    --icon-svg: url("/vendor/ionicons/albums-outline.svg");
+  }
+  .icon-options {
+    --icon-svg: url("/vendor/ionicons/options-outline.svg");
+  }
+  .icon-image {
+    --icon-svg: url("/vendor/ionicons/image-outline.svg");
+  }
+  .icon-cloud-upload {
+    --icon-svg: url("/vendor/ionicons/cloud-upload-outline.svg");
+  }
+  .icon-add {
+    --icon-svg: url("/vendor/ionicons/add-outline.svg");
+  }
+  .icon-back {
+    --icon-svg: url("/vendor/ionicons/arrow-back-outline.svg");
+  }
+  .icon-undo {
+    --icon-svg: url("/vendor/ionicons/arrow-undo-outline.svg");
+  }
+  .icon-redo {
+    --icon-svg: url("/vendor/ionicons/arrow-redo-outline.svg");
+  }
+  .icon-check {
+    --icon-svg: url("/vendor/ionicons/checkmark-outline.svg");
+  }
+  .icon-chevron-down {
+    --icon-svg: url("/vendor/ionicons/chevron-down-outline.svg");
+  }
+  .icon-edit {
+    --icon-svg: url("/vendor/ionicons/create-outline.svg");
+  }
+  .icon-swap {
+    --icon-svg: url("/vendor/ionicons/swap-vertical-outline.svg");
+  }
+}

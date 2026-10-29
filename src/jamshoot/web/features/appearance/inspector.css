@@ -1,0 +1,19 @@
+@layer studio {
+  .inspector-section {
+    padding: var(--ds-space-sm);
+    border-bottom: var(--studio-rule);
+  }
+
+  .inspector-error {
+    padding: var(--ds-space-xs) var(--ds-space-sm);
+    border-bottom: var(--ds-hairline) solid var(--studio-danger-border);
+    background: var(--studio-danger-surface);
+    color: var(--studio-danger);
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+  }
+
+  .save-palette {
+    margin-top: var(--ds-space-xs);
+  }
+}

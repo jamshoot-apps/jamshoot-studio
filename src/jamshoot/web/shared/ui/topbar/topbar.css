@@ -1,0 +1,53 @@
+/* App bar and wordmark shared by the start screen and the editor. */
+@layer ds.components {
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: var(--ds-space-xs);
+    height: var(--ds-header-height);
+    padding: 0 var(--ds-space-xs) 0 var(--ds-space-sm);
+    border-bottom: var(--studio-rule);
+    background: var(--ds-surface);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    font-size: var(--ds-text-small);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* The compact lockup: the square mark, unaltered, at bar size. */
+  .brand-logo {
+    width: var(--ds-space-xl);
+    height: var(--ds-space-xl);
+    aspect-ratio: 1;
+  }
+
+  /* Both words sit in one line box so they share a baseline despite their sizes; margins
+     instead of a flex gap leave no space after the mark when the words are hidden. */
+  .brand strong,
+  .brand-sub {
+    display: none;
+    margin-left: var(--ds-space-2xs);
+  }
+
+  .brand-sub {
+    color: var(--ds-text-muted);
+    font-size: var(--ds-text-caption);
+  }
+
+  @media (min-width: 34rem) {
+    .brand strong {
+      display: inline;
+    }
+  }
+
+  @media (min-width: 52rem) {
+    .brand-sub {
+      display: inline;
+    }
+  }
+}
